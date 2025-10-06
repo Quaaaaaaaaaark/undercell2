@@ -1,0 +1,10 @@
+WG: retry 3, pick B because I dont like D
+STOP
+QUIZ
+A
+B
+C
+D
+2
+globuleSuccessB
+globuleFail
