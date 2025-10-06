@@ -200,6 +200,10 @@ public class mGraphics extends JPanel implements Runnable{
 			System.out.println("Stop trying to make me download incomprehensible images of eldritch cell horrors!");
 		}
 	}
+	
+	public void doNothing() {
+		System.out.println("this method title is a lie");
+	}
 
 	public void textBox(String text) {
 		if ((!text.contains(":"))||text.substring(0,14).equals("QUEST COMPLETE")) {
