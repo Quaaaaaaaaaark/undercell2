@@ -31,8 +31,11 @@ public class mGraphics extends JPanel implements Runnable{
 	protected ArrayList<DanceArrow> arrows;
 	protected ArrayList<Globby> globbies;
 	protected ArrayList<ATP> atp;
+	protected ArrayList<Lysosome> lysosomes;
+	protected ArrayList<FallProt> fallProteins;
 	protected MTimer rTimer;
 	protected Platformer jumpy;
+	protected HeartBox heart;
 	
 	public mGraphics(Main main, JFrame frame, ArrayList<String> textList) {
 		this.main = main;
@@ -92,6 +95,10 @@ public class mGraphics extends JPanel implements Runnable{
 			globuleGame();
 		} else if (Main.status.equals("mitoGame")) {
 			mitoGame();
+		} else if (Main.status.equals("lysoGame")) {
+			lysoGame();
+		} else if (Main.status.equals("erGame")) {
+			erGame();
 		}
 	}
 	
@@ -206,7 +213,7 @@ public class mGraphics extends JPanel implements Runnable{
 	}
 
 	public void textBox(String text) {
-		if ((!text.contains(":"))||text.substring(0,14).equals("QUEST COMPLETE")) {
+		if ((!text.contains(":"))||(text.length() >= 14 && text.substring(0,14).equals("QUEST COMPLETE"))) {
 			text = "Narrator: " + text;
 		}
 		String[] textBits = text.split(":");
@@ -1839,6 +1846,621 @@ public class mGraphics extends JPanel implements Runnable{
 				jumpy.x = 92;
 			}
 		}
+	}
+	
+	public void lysoGame() {
+		g.setColor(Color.black);
+		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
+		drawEnemy("vesicle.jpg");
+		if (Main.substate.equals("textbox")) {
+			if (textList.size() == 0) {
+				if (Main.postText.equals("quiz")) {
+					Main.substate = "quiz";
+				} else if (Main.postText.equals("game:lyso")) {
+					Main.substate = "gameCount";
+					animCounter = 0;
+					timer.start();
+					drawEmptyTextBox();
+				} else if (Main.postText.equals("win:lyso")) {
+					Main.substate = "demoEnd";
+				}
+			} else {
+				textBox(textList.get(0));
+			}
+			drawHealthBar(5);
+		} else if (Main.substate.equals("quiz")) {
+			drawQuiz();
+			drawHealthBar(5);
+		} else if (Main.substate.equals("quizAnswers")) {
+			drawQuiz();
+			if (timer.get() >= 2) {
+				if (Main.nextQuiz.answer == Main.nextQuiz.selected) {
+					Main.prevKnowledge = Main.knowledge;
+					Main.knowledge++;
+					main.addToTextList(Main.nextQuiz.success);
+				} else {
+					Main.prevKnowledge = Main.knowledge;
+					main.addRandomlyToList(Main.nextQuiz.fail);
+				}
+				Main.substate = "textbox";
+			}
+			drawHealthBar(5);
+		} else if (Main.substate.equals("game")) {
+			updateHeartBox();
+			drawLysoGame();
+			drawHealthBar(5);
+		} else if (Main.substate.equals("gameCount")) {
+			if (animCounter < 30) {
+				animCounter++;
+			}
+			if (timer.get() >= 1) {
+				Main.substate = "game";
+				heart = new HeartBox();
+				setUpLysosomes();
+				timer.start();
+			} 
+			drawShrinkingBox();
+			drawHealthBar(5);
+		} else if (Main.substate.equals("postgame")) {
+			if (animCounter < 30) {
+				animCounter++;
+			}
+			if (timer.get() >= 1) {
+				if (Main.prevKnowledge == Main.knowledge) {
+					main.addToTextList("lysoretry" + (Main.knowledge + 1));
+				} else {
+					main.addToTextList("lysoq" + (Main.knowledge + 1));
+				}
+				Main.substate = "textbox";
+				drawEmptyTextBox();
+				drawHealthBar();
+			} else {
+			drawGrowingBox();
+			drawHealthBar(5);
+			}
+		} else if (Main.substate.equals("demoEnd")) {
+			g.setColor(Color.green);
+			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
+			g.setColor(Color.white);
+			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
+			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
+			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+		} else if (Main.substate.equals("dead")) {
+			g.setColor(Color.red);
+			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
+			g.setColor(Color.black);
+			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
+			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
+			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+		}
+	}
+	
+	public void setUpLysosomes() {
+		lysosomes = new ArrayList<Lysosome>();
+		switch(Main.knowledge) {
+		case 0:
+		case 1:
+			if (Main.random(0,1) == 0) {
+				addLyso(25, 50, -50, 50, 150, 3, 2);
+				int modifier = 1;
+				if (Main.random(0,1) == 0) {
+					modifier = -1;
+				}
+				addLyso(25, 50+(100*modifier), 50, 50+(-100*modifier), 50, 3, 4);
+				for (int i = 0; i<5; i++) {
+					addLyso(10, 10+(i*20), -50, 10+(i*20), 150, 3, 6+i*0.5);
+				}
+				for (int i = 4; i>0; i--) {
+					addLyso(10,90-(i*20), -50, 90-(i*20), 150, 3, 8+(i*0.5));
+				}
+			} else {
+				addLyso(25, 50, -50, 50, 150, 3, 2);
+				int modifier = 1;
+				if (Main.random(0,1) == 0) {
+					modifier = -1;
+				}
+				addLyso(25, 50+(100*modifier), 50, 50+(-100*modifier), 50, 3, 4);
+				for (int i = 0; i<5; i++) {
+					addLyso(10, 50+(100*modifier), 10+(i*20), 50+(-100*modifier), 10+(i*20), 3, 6+i*0.5);
+				}
+				for (int i = 4; i>0; i--) {
+					addLyso(10,50+(100*modifier),90-(i*20),50+(-100*modifier), 90-(i*20), 3, 8+(i*0.5));
+				}
+			}
+			break;
+		case 2:
+			int pos = 1;
+			if (Main.random(0,1) == 0) {
+				pos = -1;
+			}
+			int alsoPos = 1;
+			if (Main.random(0,1) == 0) {
+				alsoPos = -1;
+			}
+			if (Main.random(0,1) == 0) {
+				addLyso(25, 50+(25*alsoPos), 50+(100*pos), 50+(25*alsoPos), 50+(-100*pos), 3, 4);
+				addLyso(25, 50+(-25*alsoPos), 50+(100*pos), 50+(-25*alsoPos), 50+(-100*pos), 3, 5);
+				addLyso(25, 50+(25*alsoPos), 50+(100*pos), 50+(25*alsoPos), 50+(-100*pos), 3, 6);
+			} else {
+				addLyso(25, 50+(100*pos), 50+(25*alsoPos), 50 + (-100*pos), 50+(25*alsoPos), 3, 4);
+				addLyso(25, 50+(100*pos), 50+(-25*alsoPos), 50 + (-100*pos), 50+(-25*alsoPos), 3, 5);
+				addLyso(25, 50+(100*pos), 50+(25*alsoPos), 50 + (-100*pos), 50+(25*alsoPos), 3, 6);
+			}
+			addChaserLyso(15, 2, 9);
+			addChaserLyso(15,2,10);
+			addChaserLyso(15, 2, 11);
+			addChaserLyso(15, 2, 12);
+			addChaserLyso(15, 2, 13);
+			addLyso(20, -50, -50, 150, 150, 3, 16);
+			addLyso(20, 150, -50, -50, 150, 3, 16);
+			break;
+		case 3:
+			int swap = 1;
+			if (Main.random(0,1) == 0) {
+				swap = -1;
+			}
+			if (Main.random(0,1)==0) {
+				addLyso(25, 50+(25*swap), -50, 50+(25*swap), 150, 3, 2);
+				addLyso(25, 50+(-25*swap), 150, 50+(-25*swap), -50, 3, 2);
+				addLyso(25, 50+(25*swap), -50, 50+(25*swap), 150, 3, 4);
+				addLyso(25, 50+(-25*swap), 150, 50+(-25*swap), -50, 3, 4);
+				addLyso(25, 50+(25*swap), -50, 50+(25*swap), 150, 3, 6);
+				addLyso(25, 50+(-25*swap), 150, 50+(-25*swap), -50, 3, 6);
+			} else {
+				addLyso(25, -50, 50+(25*swap), 150, 50+(25*swap), 3, 2);
+				addLyso(25, 150, 50+(-25*swap), -50, 50+(-25*swap), 3, 2);
+				addLyso(25, -50, 50+(25*swap), 150, 50+(25*swap), 3, 4);
+				addLyso(25, 150, 50+(-25*swap), -50, 50+(-25*swap), 3, 4);
+				addLyso(25, -50, 50+(25*swap), 150, 50+(25*swap), 3, 6);
+				addLyso(25, 150, 50+(-25*swap), -50, 50+(-25*swap), 3, 6);
+			}
+			for (int i = 0; i<3; i++) {
+				addChaserCirc(5, 4, 8+(i*2));
+			}
+			swap = 1;
+			if (Main.random(0,1) == 0) {
+				swap = -1;
+			}
+			int otherSwap = 1;
+			if (Main.random(0,1)==0) {
+				otherSwap = -1;
+			}
+			if (Main.random(0,1) == 0) {
+				addLyso(40, 50 + (100*swap), 50 + (10*otherSwap), 50 + (-100*swap), 50 + (10*otherSwap), 5, 20);
+			} else {
+				addLyso(40, 50 + (10*otherSwap), 50 + (100*swap), 50 + (10*otherSwap), 50 + (-100*swap), 5, 20);
+			}
+		}
+	}
+	
+	public void addChaserCirc(double rad, double rt, double wait) {
+		lysosomes.add(new Lysosome(rad, rt, wait, true));
+	}
+	
+	public void addFallProtCirc(int x, double rt, double wait, boolean bonus) {
+		fallProteins.add(new FallProt(x, rt, wait, false, bonus));
+	}
+	
+	public void addLyso(double rad, int fx, int fy, int tx, int ty, double rt, double w) {
+		lysosomes.add(new Lysosome(rad, fx, fy, tx, ty, rt, w));
+	}
+	
+	public void addChaserLyso(double rad, double rt, double wait) {
+		lysosomes.add(new Lysosome(rad, rt, wait));
+	}
+	
+	
+	public void updateHeartBox() {
+		if (KeyInput.left) {
+			heart.x -= 2;
+			if (heart.x < 0) {
+				heart.x = 0;
+			}
+		}
+		if (KeyInput.right) {
+			heart.x += 2;
+			if (heart.x > 92) {
+				heart.x = 92;
+			}
+		}
+		if (Main.status.equals("lysoGame") && KeyInput.down) {
+			heart.y += 2;
+			if (heart.y > 92) {
+				heart.y = 92;
+			}
+		}
+		if (Main.status.equals("lysoGame") && KeyInput.up) {
+			heart.y -= 2;
+			if (heart.y < 0) {
+				heart.y = 0;
+			}
+		}
+	}
+	
+	public void drawLysoGame() {
+		int length = frameHeight()*3/8;
+		int boxX = frameWidth()/2 - (length/2);
+		int boxY = frameHeight()/2;
+		int amount = length/20;
+		double px = length/100.0;
+		int otherAmount = boxY - (frameHeight()*3/8);
+		int otherAmtPx = round(otherAmount/px);
+		g.setColor(Color.white);
+		g.fillRect(boxX - otherAmount, boxY - otherAmount, length + otherAmount*2, length + otherAmount*2);
+		g.setColor(Color.black);
+		g.fillRect(boxX - otherAmount + amount, boxY - otherAmount + amount, length + otherAmount*2 - amount*2, length + otherAmount*2 - amount*2);
+		g.setColor(Color.white);
+		g.fillRect(boxX - amount, boxY - amount, length + amount*2, length + amount*2);
+		g.setColor(Color.black);
+		g.fillRect(boxX, boxY, length, length);
+		drawHeart(px, boxX, boxY);
+		if (lysosomes.size() == 0) {
+			Main.substate = "postgame";
+			timer.start();
+			animCounter = 0;
+			return;
+		}
+		Graphics tg = g.create();
+		Graphics2D g2 = (Graphics2D) tg;
+		g2.setClip(boxX - otherAmount + amount, boxY - otherAmount + amount, length + otherAmount*2 - amount*2, length + otherAmount*2 - amount*2);
+		for (Lysosome l : lysosomes) {
+			drawLysosome(g2, l, px, boxX, boxY);
+		}
+		for (int i = 0; i<lysosomes.size(); i++) {
+			Lysosome l = lysosomes.get(i);
+			if (l.get() >= l.runTime && (l.x - l.radius > 100 + otherAmtPx ||l.x + l.radius < 0 - otherAmtPx || l.y - l.radius > 100 + otherAmtPx || l.y + l.radius < 0 - otherAmtPx)) {
+				lysosomes.remove(i);
+				i--;
+			} else if (l.toRemove) {
+				lysosomes.remove(i);
+				i--;
+			}
+		}
+	}
+	
+	public void drawHeart(double px, int boxX, int boxY) {
+		int length = round(px*8);
+		int x = boxX + round(px*heart.x);
+		int y = boxY + round(px*heart.y);
+		try {
+			Image image = ImageIO.read(new File("assets/player-stand-in.jpg"));
+			g.drawImage(image, x, y, length, length, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("The wrath of Toby Fox be upon ye!");
+		}
+	}
+	
+	public void drawLysosome(Graphics2D g2, Lysosome l, double px, int boxX, int boxY) {
+		if (l.chaser && l.get() >= 0) {
+			setChaser(l);
+		} else if (l.chaser) {
+			return;
+		}
+		if (l.circle && l.get() >= 0) {
+			if (l instanceof FallProt) {
+				addCircleFallProts(l.fromX, l.runTime, ((FallProt)l).bonus);
+			} else {
+				addCircles(l.radius, l.runTime);
+			}
+			l.circle = false;
+			l.toRemove = true;
+		} else if (l.circle) {
+			return;
+		}
+		//l.x = Math.min(l.toX, l.fromX) + round((Math.abs(l.toX - l.fromX))*l.get()/l.runTime);
+		//l.y = Math.min(l.toY, l.fromY) + round((Math.abs(l.toY - l.fromY))*l.get()/l.runTime);
+		l.x = l.fromX + round((l.toX - l.fromX)*l.get()/l.runTime);
+		l.y = l.fromY + round((l.toY - l.fromY)*l.get()/l.runTime);
+		int length = round(px*l.radius*2);
+		int x = boxX + round(l.x * px) - length/2;
+		int y = boxY + round(l.y*px) - length/2;
+		if (Main.canBeHurt() && Math.hypot(Math.abs(l.x-(heart.x+4)), Math.abs(l.y - (heart.y+4))) <= l.radius + 4) {
+			Main.health--;
+			if (Main.health == 0) {
+				Main.substate = "dead";
+				return;
+			}
+			Main.iTimer.start();
+		}
+		try {
+			Image image;
+			if (l instanceof FallProt) {
+				image = ImageIO.read(new File("assets/blockade-stand-in.png"));
+			} else {
+				image = ImageIO.read(new File("assets/lysosome-stand-in.png"));
+			}
+			g2.drawImage(image, x, y, length, length, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("lies.\n\n\nosomes.\n\n\n");
+		}
+	}
+	
+	
+	
+	public void setChaser(Lysosome l) {
+		if (l instanceof FallProt) {
+			l.fromX = l.toX;
+			l.toX = heart.x;
+			l.chaser = false;
+			l.timer.start();
+			return;
+		}
+		l.chaser = false;
+		l.fromX = l.toX;
+		l.fromY = l.toY;
+		l.toX = heart.x;
+		l.toY = heart.y;
+		l.timer.start();
+	}
+		
+	
+	public void addCircles(double rad, double rt) {
+		int distX, distY;
+		for (int i = 0; i<12; i++) {
+			distX = round(100*Math.cos(Math.toRadians(30*i)));
+			distY = round(100*Math.sin(Math.toRadians(30*i)));
+			addLyso(rad, heart.x + distX, heart.y + distY, heart.x, heart.y, rt, 0);
+		}
+	}
+	
+	public void addCircleFallProts(int x, double rt, boolean shouldChange) {
+		int distX, distY;
+		double extra = 0;
+		int max = 24;
+		if (shouldChange) {
+			extra = 7.5;
+			max = 23;
+		}
+		for (int i = 12; i<=max; i++) {
+			distX = round(100*Math.cos(Math.toRadians(15*i + extra)));
+			distY = round(100*Math.sin(Math.toRadians(15*i + extra)));
+			fallProteins.add(new FallProt(x, 0, x+distX, -1*distY, rt, 0));
+		}
+	}
+	
+	public void erGame() {
+		g.setColor(Color.black);
+		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
+		drawEnemy("vesicle.jpg");
+		if (Main.substate.equals("textbox")) {
+			if (textList.size() == 0) {
+				if (Main.postText.equals("quiz")) {
+					Main.substate = "quiz";
+				} else if (Main.postText.equals("game:er")) {
+					Main.substate = "gameCount";
+					animCounter = 0;
+					timer.start();
+					drawEmptyTextBox();
+				} else if (Main.postText.equals("win:er")) {
+					Main.substate = "demoEnd";
+				}
+			} else {
+				textBox(textList.get(0));
+			}
+			drawHealthBar(8);
+		} else if (Main.substate.equals("quiz")) {
+			drawQuiz();
+			drawHealthBar(8);
+		} else if (Main.substate.equals("quizAnswers")) {
+			drawQuiz();
+			if (timer.get() >= 2) {
+				if (Main.nextQuiz.answer == Main.nextQuiz.selected) {
+					Main.prevKnowledge = Main.knowledge;
+					Main.knowledge++;
+					main.addToTextList(Main.nextQuiz.success);
+				} else {
+					Main.prevKnowledge = Main.knowledge;
+					main.addRandomlyToList(Main.nextQuiz.fail);
+				}
+				Main.substate = "textbox";
+			}
+			drawHealthBar(8);
+		} else if (Main.substate.equals("game")) {
+			updateHeartBox();
+			drawERGame();
+			drawHealthBar(8);
+		} else if (Main.substate.equals("gameCount")) {
+			if (animCounter < 30) {
+				animCounter++;
+			}
+			if (timer.get() >= 1) {
+				Main.substate = "game";
+				heart = new HeartBox(92);
+				setUpFallingProteins();
+				timer.start();
+			} 
+			drawShrinkingBox();
+			drawHealthBar(8);
+		} else if (Main.substate.equals("postgame")) {
+			if (animCounter < 30) {
+				animCounter++;
+			}
+			if (timer.get() >= 1) {
+				if (Main.prevKnowledge == Main.knowledge) {
+					main.addToTextList("erretry" + (Main.knowledge + 1));
+				} else {
+					main.addToTextList("erq" + (Main.knowledge + 1));
+				}
+				Main.substate = "textbox";
+				drawEmptyTextBox();
+				drawHealthBar(8);
+			} else {
+			drawGrowingBox();
+			drawHealthBar(8);
+			}
+		} else if (Main.substate.equals("demoEnd")) {
+			g.setColor(Color.green);
+			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
+			g.setColor(Color.white);
+			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
+			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
+			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+		} else if (Main.substate.equals("dead")) {
+			g.setColor(Color.red);
+			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
+			g.setColor(Color.black);
+			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
+			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
+			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+		}
+	}
+	
+	public void drawERGame() {
+		int length = frameHeight()*3/8;
+		int boxX = frameWidth()/2 - (length/2);
+		int boxY = frameHeight()/2;
+		int amount = length/20;
+		double px = length/100.0;
+		g.setColor(Color.white);
+		g.fillRect(boxX - amount, boxY - amount, length + amount*2, length + amount*2);
+		g.setColor(Color.black);
+		g.fillRect(boxX, boxY, length, length);
+		drawHeart(px, boxX, boxY);
+		if (fallProteins.size() == 0) {
+			Main.substate = "postgame";
+			timer.start();
+			animCounter = 0;
+			return;
+		}
+		Graphics tg = g.create();
+		Graphics2D g2 = (Graphics2D) tg;
+		g2.setClip(boxX, boxY, length, length);
+		for (int i = 0; i<fallProteins.size(); i++) {
+			if (fallProteins.get(i).get() >= 0) {
+				drawLysosome(g2, fallProteins.get(i), px, boxX, boxY);
+			}
+		}
+		for (int i = 0; i<fallProteins.size(); i++) {
+			FallProt p = fallProteins.get(i);
+			if (p.get() >= p.runTime && ((p.y - p.radius > 100|| p.y + p.radius < 0) || (p.x - p.radius > 100 || p.x + p.radius <0))) {
+				fallProteins.remove(i);
+				i--;
+			} else if (p.toRemove) {
+				fallProteins.remove(i);
+				i--;
+			}
+		}
+	}
+	
+	public void setUpFallingProteins() {
+		fallProteins = new ArrayList<FallProt>();
+		switch (Main.knowledge) {
+		case 0:
+		case 1:
+			addFP(50, 3, 1);
+			ArrayList<Integer> locs;
+			for (int i = 2; i<=6; i++) {
+				locs = getLocs();
+				for (int j = 0; j<i; j++) {
+					addFP(locs.remove(Main.random(0,locs.size()-1)), 3, i);
+				}
+			}
+			for (int i = 0; i<5; i++) {
+				addChaserFP(5 + 10*Main.random(0,9), 3, 8 + i);
+			}
+			addFallProtCirc(50, 3, 14, false);
+			break;
+		case 2:
+			for (int i = 0; i<9; i++) {
+				addFP(15 + i*10, 4, 1);
+			}
+			for (int i = 0; i<9; i++) {
+				addFP(5 + i*10, 3, 3 + i/5.0);
+			}
+			for (int i = 0; i<9; i++) {
+				addFP(95 - 10*i, 3, 5.5 + i/5.0);
+			}
+			for (int i = 0; i < 3; i++) {
+				addFallProtCirc(25*Main.random(1,3), 3, 8 + i*2, false);
+			}
+			for (int i = 0; i<5; i++) {
+				addChaserFP(Main.random(5,95), 2, 15 + i/5.0);
+			}
+			for (int i = 0; i<5; i++) {
+				addChaserFP(Main.random(5,95), 2, 17 + i/5.0);
+			}
+			for (int i = 0; i<5; i++) {
+				addChaserFP(Main.random(5,95), 2, 19 + i/5.0);
+			}
+			for (int i = 0; i<5; i++) {
+				addChaserFP(Main.random(5,95), 2, 21 + i/5.0);
+			}
+			for (int i = 0; i<5; i++) {
+				addChaserFP(Main.random(5,95), 2, 23 + i/5.0);
+			}
+			break;
+		case 3:
+			for (int i = 0; i<5; i++) {
+				for (int j = 0; j<10; j++) {
+					addChaserFP(5 + j*10, 3, 2 + i);
+				}
+			}
+			addFP(0, 3, 8);
+			addFP(100, 3, 8);
+			addFP(10, 3, 8.2);
+			addFP(90, 3, 8.2);
+			addFP(20, 3, 8.4);
+			addFP(80, 3, 8.4);
+			addFP(30, 3, 8.6);
+			addFP(70, 3, 8.6);
+			int center = 50;
+			double counter = 8.8;
+			while (center > 10) {
+				addFP(center + 20, 3, counter);
+				addFP(center - 20, 3, counter);
+				center -= 5;
+				counter += 0.2;
+			}
+			while (center < 90) {
+				addFP(center + 20, 3, counter);
+				addFP(center - 20, 3, counter);
+				center +=5;
+				counter += 0.2;
+			}
+			while (center > 30) {
+				addFP(center + 20, 3, counter);
+				addFP(center - 20, 3, counter);
+				center -=5;
+				counter += 0.2;
+			}
+			while (center < 70) {
+				addFP(center + 20, 3, counter);
+				addFP(center - 20, 3, counter);
+				center +=5;
+				counter += 0.2;
+			}
+			while (center >= 50) {
+				addFP(center + 20, 3, counter);
+				addFP(center - 20, 3, counter);
+				center -=5;
+				counter += 0.2;
+			}
+			addFallProtCirc(50, 4, counter + 1, false);
+			addFallProtCirc(50, 4, counter + 2, true);
+			addFallProtCirc(50, 4, counter + 3, false);
+			addFallProtCirc(50, 4, counter + 4, true);
+			addFallProtCirc(50, 4, counter + 5, false);
+			addFallProtCirc(20, 4, counter + 7, false);
+			addFallProtCirc(80, 4, counter + 7, false);
+		}
+	}
+	
+	public ArrayList<Integer> getLocs(){
+		ArrayList<Integer> temp = new ArrayList<Integer>();
+		for (int m = 5; m<=95; m+=10) {
+			temp.add(m);
+		}
+		return temp;
+	}
+	
+	public void addFP(int x, double rt, double wait) {
+		fallProteins.add(new FallProt(x, rt, wait));
+	}
+	
+	public void addChaserFP(int x, double rt, double wait) {
+		fallProteins.add(new FallProt(x, rt, wait, true, false));
 	}
 	
 }

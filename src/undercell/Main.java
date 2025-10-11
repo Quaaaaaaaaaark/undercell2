@@ -32,10 +32,10 @@ public class Main {
 		//stuff here
 		knowledge = 0;
 		prevKnowledge = 0;
-		health = 3;
-		Main.status = "mitoGame";
+		health = 8;
+		Main.status = "erGame";
 		Main.substate = "textbox";
-		addToTextList("mitoOpening");
+		addToTextList("erOpening");
 		frame.add(jonathan);
 		frame.pack();
 		frame.setVisible(true);
@@ -117,6 +117,9 @@ public class Main {
 	}
 	
 	public static boolean canBeHurt() {
+		if (Main.status.equals("lysoGame") && iTimer.get() >= 1.5) {
+			return true;
+		}
 		if (iTimer.get() >= 1) {
 			return true;
 		} else {

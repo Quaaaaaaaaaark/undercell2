@@ -80,6 +80,14 @@ public class KeyInput extends KeyAdapter{
 				code = e.getKeyCode();
 				runMitoGame();
 				break;
+			case "lysoGame":
+				code = e.getKeyCode();
+				runLysoGame();
+				break;
+			case "erGame":
+				code = e.getKeyCode();
+				runERGame();
+				break;
 			}
 		}
 	}
@@ -219,6 +227,34 @@ public class KeyInput extends KeyAdapter{
 		}
 	}
 	
+	public void runLysoGame() {
+		switch (code) {
+		case 37: 
+			left = true;
+			break;
+		case 38: 
+			up = true;
+			break;
+		case 39: 
+			right = true;
+			break;
+		case 40: 
+			down = true;
+			break;
+		}
+	}
+	
+	public void runERGame() {
+		switch (code) {
+		case 37:
+			left = true;
+			break;
+		case 39:
+			right = true;
+			break;
+		}
+	}
+	
 	/*
 	Key Codes:
 	38 = up
@@ -229,6 +265,7 @@ public class KeyInput extends KeyAdapter{
 	10 = enter
 	*/
 	
+
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case 37:
