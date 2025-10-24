@@ -24,18 +24,18 @@ public class Main {
 	public static int health;
 	public static MTimer iTimer;
 	
+	
 	public Main() {
 		frame = new JFrame("Framename");
 		textList = new ArrayList<String>();
 		jonathan = new mGraphics(this, frame, textList);
 		jonathan.start();
-		//stuff here
 		knowledge = 0;
 		prevKnowledge = 0;
 		health = 8;
-		Main.status = "erGame";
+		Main.status = "intfilGame";
 		Main.substate = "textbox";
-		addToTextList("erOpening");
+		addToTextList("intfilOpening");
 		frame.add(jonathan);
 		frame.pack();
 		frame.setVisible(true);
@@ -117,10 +117,11 @@ public class Main {
 	}
 	
 	public static boolean canBeHurt() {
-		if (Main.status.equals("lysoGame") && iTimer.get() >= 1.5) {
+		if (Main.status.equals("intfilGame") && iTimer.get() >= 2) {
 			return true;
-		}
-		if (iTimer.get() >= 1) {
+		} else if (Main.status.equals("lysoGame") && iTimer.get() >= 1.5) {
+			return true;
+		}  else if (iTimer.get() >= 1) {
 			return true;
 		} else {
 			return false;

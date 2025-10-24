@@ -7,7 +7,8 @@ public class KeyInput extends KeyAdapter{
 	protected Main main;
 	protected int code;
 	protected mGraphics jonathan;
-	public static boolean left, right, up, down;
+	public static boolean left, right, up, down, space;
+	public static int mostRecent;
 	
 	public KeyInput(Main main, mGraphics jonathan) {
 		this.main = main;
@@ -16,6 +17,7 @@ public class KeyInput extends KeyAdapter{
 		right = false;
 		up = false;
 		down = false;
+		space = false;
 	}
 	
 	/*
@@ -30,15 +32,13 @@ public class KeyInput extends KeyAdapter{
 	
 	public void keyPressed(KeyEvent e) {
 		if (Main.substate.equals("textbox")) {
-			if (mGraphics.animCounter < main.textList.get(0).length()*1.5) {
+			if (main.textList.size() != 0 && mGraphics.animCounter < main.textList.get(0).length()*1.5) {
 				mGraphics.animCounter = mGraphics.round(main.textList.get(0).length()*1.5);
-				System.out.println(main.textList.get(0));
 			} else {
 				main.nextText();
 			}
 		} else if (Main.substate.equals("quiz")) {
 			code = e.getKeyCode();
-			System.out.println(code);
 			switch (code) {
 			case 37:
 				Main.nextQuiz.selectedLeft();
@@ -58,6 +58,13 @@ public class KeyInput extends KeyAdapter{
 				jonathan.startAnswersTimer();
 				mGraphics.animCounter = 0;
 			}
+		} else if (Main.substate.equals("gameWait") && Main.status.equals("microfilGame")) {
+			if (e.getKeyCode() == 32 || e.getKeyCode() == 10 || e.getKeyCode() == 38) {
+				Main.substate = "game";
+				jonathan.startFlappyPipes();
+				jonathan.flappy.savedY = 46;
+				jonathan.flappy.timer.start();
+			}
 		} else if (Main.substate.equals("game")) {
 			switch (Main.status) {
 			case "golgiGame":
@@ -68,9 +75,9 @@ public class KeyInput extends KeyAdapter{
 				code = e.getKeyCode();
 				runVesicleGame();
 				break;
-			case "nucleusGame":
+			case "riboGame":
 				code = e.getKeyCode();
-				runNucleusGame();
+				runRiboGame();
 				break;
 			case "globuleGame":
 				code = e.getKeyCode();
@@ -87,6 +94,38 @@ public class KeyInput extends KeyAdapter{
 			case "erGame":
 				code = e.getKeyCode();
 				runERGame();
+				break;
+			case "nucleusGame":
+				code = e.getKeyCode();
+				runNucleusGame();
+				break;
+			case "vacuoleGame":
+				code = e.getKeyCode();
+				runVacuoleGame();
+				break;
+			case "membraneGame":
+				code = e.getKeyCode();
+				runMembraneGame();
+				break;
+			case "cytoGame":
+				code = e.getKeyCode();
+				runCytoGame();
+				break;
+			case "peroxiGame":
+				code = e.getKeyCode();
+				runPeroxiGame();
+				break;
+			case "microtubuleGame":
+				code = e.getKeyCode();
+				runMicrotubuleGame();
+				break;
+			case "microfilGame":
+				code = e.getKeyCode();
+				runMicrofilGame();
+				break;
+			case "intfilGame":
+				code = e.getKeyCode();
+				runIntFilGame();
 				break;
 			}
 		}
@@ -150,7 +189,7 @@ public class KeyInput extends KeyAdapter{
 		}
 	}
 	
-	public void runNucleusGame() {
+	public void runRiboGame() {
 		boolean found = false;
 		switch (code) {
 		case 38:
@@ -255,6 +294,129 @@ public class KeyInput extends KeyAdapter{
 		}
 	}
 	
+	public void runNucleusGame() {
+		switch (code) {
+		case 37:
+			if (Nucleotide.baseSelected != 0) {
+				Nucleotide.baseSelected--;
+			}
+			break;
+		case 39:
+			if (Nucleotide.baseSelected != jonathan.endNucleotides.size() - 2) {
+				Nucleotide.baseSelected++;
+			}
+			break;
+		case 32:
+		case 10:
+			String temp = jonathan.endNucleotides.get(Nucleotide.baseSelected);
+			jonathan.endNucleotides.set(Nucleotide.baseSelected, jonathan.endNucleotides.get(Nucleotide.baseSelected+1));
+			jonathan.endNucleotides.set(Nucleotide.baseSelected + 1, temp);
+		}
+	}
+	
+	public void runVacuoleGame() {
+		if (jonathan.dodgey.timer.get() < 1) {
+			return;
+		}
+		String dir = "N";
+		switch (code) {
+		case 37:
+			dir = "W";
+			break;
+		case 38:
+			dir = "N";
+			break;
+		case 39:
+			dir = "E";
+			break;
+		case 40:
+			dir = "S";
+			break;
+		}
+		jonathan.dodgey.jump(dir);
+	}
+	
+	public void runMembraneGame() {
+		switch (code) {
+		case 37: 
+			left = true;
+			break;
+		case 39:
+			right = true;
+			break;
+		}
+	}
+	
+	public void runCytoGame() {
+		switch (code) {
+		case 37:
+			jonathan.heart.setDir("W");
+			break;
+		case 38:
+			jonathan.heart.setDir("N");
+			break;
+		case 39:
+			jonathan.heart.setDir("E");
+			break;
+		case 40:
+			jonathan.heart.setDir("S");
+			break;
+		}
+	}
+	
+	public void runPeroxiGame() {
+		switch (code) {
+		case 37:
+			left = true;
+			break;
+		case 38:
+			up = true;
+			break;
+		case 39:
+			right = true;
+			break;
+		case 40:
+			down = true;
+			break;
+		case 32:
+		case 10:
+			space = true;
+			break;
+		}
+	}
+	
+	public void runMicrotubuleGame() {
+		switch (code) {
+		case 37:
+			left = true;
+			break;
+		case 38:
+			up = true;
+			break;
+		case 39:
+			right = true;
+			break;
+		case 40:
+			down = true;
+			break;
+		}
+	}
+	
+	public void runMicrofilGame() {
+		switch (code) {
+		case 38:
+		case 32:
+		case 10:
+			jonathan.flappy.savedY = jonathan.flappy.y;
+			jonathan.flappy.timer.start();
+			break;
+		}
+	}
+	
+	public void runIntFilGame() {
+		mostRecent = code;
+	}
+	
 	/*
 	Key Codes:
 	38 = up
@@ -270,16 +432,31 @@ public class KeyInput extends KeyAdapter{
 		switch (e.getKeyCode()) {
 		case 37:
 			left = false;
+			if (mostRecent == 37) {
+				mostRecent = -1;
+			}
 			break;
 		case 38:
 			up = false;
+			if (mostRecent == 38) {
+				mostRecent = -1;
+			}
 			break;
 		case 39:
 			right = false;
+			if (mostRecent == 39) {
+				mostRecent = -1;
+			}
 			break;
 		case 40:
 			down = false;
+			if (mostRecent == 40) {
+				mostRecent = -1;
+			}
 			break;
+		case 32:
+		case 10:
+			space = false;
 		}
 	}
 
