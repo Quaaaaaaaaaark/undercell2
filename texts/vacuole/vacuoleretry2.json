@@ -1,10 +1,12 @@
-Vacuole: Retry question 2, select the imaginary number
+POLYCHEFTIDE: Ready to take another shot?
+POLYCHEFTIDE: If anyone can get this question right, it'd be you, chef!
+POLYCHEFTIDE: Now, please try again to tell me the structure of a RIBOSOME.
 STOP
 QUIZ
-H
-I
-J
-K
+Long and tubular, like a microtubule
+Round and membrane-bound, like a vesicle
+Consisting of two separate subunits, like a ribosome
+Large and made of several flattened discs, like the Golgi Apparatus
 2
 vacuoleSuccessB
 vacuoleFail

@@ -1,11 +1,15 @@
-A RIBOSOME appears!
-Ribosome: First question, select T
+PLANT MANAGER RIBOONE: Who are you? What are you doing on the factory floor?
+RIBOONE: Oh, you've come to learn about the RIBOSOME? I suppose we can accomidate that...
+RIBOONE: But be warned, for all time you spend in this RIBOSOME, you will be held accountable to the same responsibilities as any other employee.
+RIBOONE: Do you understand?
+RIBOONE: Good.
+RIBOONE: Now, answer this. Why are RIBOSOMES important to the cell?
 STOP
 QUIZ
-T
-U
-V
-W
-1
+They make carbohydrates, which are then used to make cellular energy
+They make lipids, which are used for many organelle membranes
+They make proteins, which are required for many cell activities
+They make nucleic acids, which are then used to make DNA and RNA
+3
 riboSuccessA
 riboFail

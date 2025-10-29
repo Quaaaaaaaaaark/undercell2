@@ -1,10 +1,11 @@
-Vacuole: Retry question 1, select h
+POLYCHEFTIDE: Ah, wonderful work. Now, you requested another chance at that question?
+POLYCHEFTIDE: Yes, that's right! What is the function of this fine VACUOLE?
 STOP
 QUIZ
-H
-I
-J
-K
-1
+Storing a wide variety of molecules
+Maintaining the cell's turgot pressure
+Isolating and containing harmful or waste products
+All of the above
+4
 vacuoleSuccessA
 vacuoleFail

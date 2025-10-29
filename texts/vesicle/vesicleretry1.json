@@ -1,10 +1,15 @@
-Vesicle: Retrying question 1, pick A
+VESICLEO: What' aren't you going to give them another chance?
+VESICLIVE: I was GETTING to that, Cleo!
+VESICLARA: Really? Because it kinda looked like you were just going to leave them...
+VESICLINT: Let's not lose track of what we're trying to do here.
+VESICLIVE: Right, of course. Now then, would you like to try this again?
+VESICLIVE: What is the main purpose of the VESICLES?
 STOP
 QUIZ
-A
-B
-C
-D
-1
+Providing bases for other organelles to build off of
+Filling gaps in cell membranes
+Transporting materials into, out of, and throughout cells
+All of the above
+3
 vesicleSuccessA
 vesicleFail

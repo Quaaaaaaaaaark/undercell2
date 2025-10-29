@@ -1,10 +1,12 @@
-Nucleus: Retry q3, pick D because im mean
+The pile of paperwork on BOB's desk seems as though it could topple at any second.
+BOB: All right, once again.
+BOB: What is the location and purpose of the NUCLEOLUS?
 STOP
 QUIZ
-A
-B
-C
-D
+In the nuclear membrane, breaks down RNA
+Within the nucleus itself, breaks down RNA
+In the nuclear membrane, produces ribosomes
+Within the nucleus itself, produces ribosomes
 4
 nucleusSuccessC
 nucleusFail

@@ -1,10 +1,11 @@
-CYTOPLASM: Retry question 3, select V
+CYBIL: Here, try this question again. I know I interrupted myself a bit while asking this one, so you can blame this on me.
+CYBIL: TRANSITION TO QUESTION
 STOP
 QUIZ
-S
-T
-U
-V
-4
+Ectoplasm is the clear outer bit, endoplasm is the dense inner bit
+Ectoplasm is pure water, endoplasm contains other molecules
+Cells start with ectoplasm, which becomes endoplasm when more molecules are added
+Endoplasm is cytoplasm from living cells, ectoplasm is cytoplasm from dead 'ghost' cells
+1
 cytoSuccessC
 cytoFail

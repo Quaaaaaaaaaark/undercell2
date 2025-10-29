@@ -1,10 +1,12 @@
-CELL MEMBRANE: Retry question 3, select K because I realized I forgot that letter, oops
+MEMBRANDALF: Once more, once more! You mustn't let past failures discourage you.
+MEMBRANDALF: Faithless is they who says farewell when the cell darkens.
+MEMBRANDALF: Now, why is it that the phospholipid bilayer is so important to the CELL MEMBRANE?
 STOP
 QUIZ
-H
-I
-J
-K
+Shape of tails allows them to interlock and hold the membrane together
+Hydrophilic heads attract water to the membrane for the cell to use
+Hydrophobic tails ensure no water ever passes through the membrane
+Amphiphilic nature causes them to assemble into a semipermeable barrier
 4
 membraneSuccessC
 membraneFail

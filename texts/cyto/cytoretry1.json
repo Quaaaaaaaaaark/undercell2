@@ -1,10 +1,12 @@
-CYTOPLASM: Retry question one, select S
+CYBIL: Here, why don't you give that last question another try?
+CYBIL: Nobody'll be upset if it takes you more than once, you know.
+CYBIL: So, why do cells have this CYTOPLASM, anyway?
 STOP
 QUIZ
-S
-T
-U
-V
-1
+Keeps an artificially high water potential
+Supports organelles and cell shape, keeps them from colliding
+Provides a fluid for all other organelles to 'swim' around in
+No reason - it's just assorted waste products that had nowhere else to go
+2
 cytoSuccessA
 cytoFail

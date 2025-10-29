@@ -1,10 +1,12 @@
-MICROTUBULE: Retry question one, select L
+MICROTABITHA: Here, try that question again.
+MICROTABITHA: Quickly, now! The MITOSIS event could be just around the corner!
+MICROTABITHA: What is the function of the MICROTUBULES we're standing on?
 STOP
 QUIZ
-L
-M
-N
-O
-1
+Providing structure and stability
+Helping move organelles within the cell
+Playing a role in letting MITOSIS happen
+All of the above
+4
 microtubuleSuccessA
 microtubuleFail

@@ -1,11 +1,12 @@
-CELL MEMBRANE: Retry the first question.
-CELL MEMBRANE: Select Q
+MEMBRANDALF: Let us move forward. There is no use in lingering on the past.
+MEMBRANDALF: Save, of course, to learn from one's mistakes. We shall give that question another try.
+MEMBRANDALF: Now, examine each statement, and tell me. Which statement is a falsehood?
 STOP
 QUIZ
-Q
-R
-S
-T
-1
+The CELL MEMBRANE conforms to the Fluid Mosaic Model
+The CELL MEMBRANE performs both diffusion and osmosis
+The CELL MEMBRANE consists of a layer of phospholipids
+The CELL MEMBRANE plays a role in cell recognition
+3
 membraneSuccessA
 membraneFail

@@ -1,10 +1,11 @@
-Nucleus: Retry q1, pick A
+BOB: Right. Now that that's taken care of, let's give this another shot.
+BOB: What our main purpose here at the NUCLEUS?
 STOP
 QUIZ
-A
-B
-C
-D
+Synthesize all other cell organelles
+Housing DNA to direct cell activities
+Using enzymes to break down DNA into usable proteins
+Providing a stable center for the CYTOSKELETON to grow from
 1
 nucleusSuccessA
 nucleusFail

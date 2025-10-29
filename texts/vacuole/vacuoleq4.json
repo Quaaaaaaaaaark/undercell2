@@ -1,10 +1,13 @@
-Vacuole: Final question, select THE CURSED ONE
+POLYCHEFTIDE: Now, prepare for the final course!
+POLYCHEFTIDE: Your molecular dessert will be accompanied with your final question.
+POLYCHEFTIDE: If you've been paying attention to the various delicacies I've served you this evening, this might be easier to figure out.
+POLYCHEFTIDE: Which of the following is NOT generally stored in vacuoles?
 STOP
 QUIZ
-H
-I
-J
-M
-4
+Carbohydrates, like sugars
+Various proteins and minerals
+ATP
+Pigments
+3
 vacuoleSuccessD
 vacuoleFail

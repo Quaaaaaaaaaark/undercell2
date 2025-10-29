@@ -1,10 +1,11 @@
-Nucleus: Retry final question, if you don't know what to pick then I don't even know what to say.
+BOB: Oh, you need it again?
+BOB: Ok, which of the following is NOT, I repeat NOT, found on the surface of the NUCLEUS?
 STOP
 QUIZ
-A
-B
-M
-D
+Nuclear pores for RNA to move through
+Ribosomes producing proteins
+Mitochondria producing ATP
+All of the above. The nuclear membrane has none of these
 3
 nucleusSuccessD
 nucleusFail

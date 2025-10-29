@@ -1,10 +1,14 @@
-Ribosome: Retry question 3, choose V
+RIBOONE: The work we do here is important, you know.
+RIBOONE: You're a protein too - you should know this, you came from one of these RIBOSOMES.
+RIBOONE: So if this quiz helps you appreciate all that we do...
+RIBOONE: I guess I'm glad to help.
+RIBOONE: ANYWAYS! What are the purposes of the small and large subsections of the RIBOSOMES?
 STOP
 QUIZ
-T
-U
-V
-W
-3
+Small forms the peptide bonds, large matches up the correct codons
+Small matches up the correct codons, large forms the peptide bonds
+Small matches and forms bonds while large holds the mRNA in place
+Small holds the mRNA in place while large matches and forms bonds
+2
 riboSuccessC
 riboFail

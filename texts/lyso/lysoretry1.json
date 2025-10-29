@@ -1,11 +1,12 @@
-Lysosome: Retry the first question.
-Lysosome: Select A
+LYSONDER: So you've managed to evade us once. I assure you, that was only a fraction of the true power of the LYSOSOMES.
+LYSONDER: I'm feeling merciful today, so here. Have another chance.
+LYSONDER: What is the purpose of these LYSOSOMES?
 STOP
 QUIZ
-A
-B
-C
-D
+Degrading macromolecules and removing unnecessary materials
+Transporting waste products out of the cell
+Consuming molecules to convert to usable ATP energy
+Chasing me around for no good reason?
 1
 lysoSuccessA
 lysoFail

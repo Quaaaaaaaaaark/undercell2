@@ -1,10 +1,12 @@
-CELL MEMBRANE: Retry question 2, select R
+MEMBRANDALF: Come now, do not let this discourage you!
+MEMBRANDALF: The burned protein teaches best. After that, advice about fire goes to the heart.
+MEMBRANDALF: Now, can you tell me which ability of the CELL MEMBRANE is represented by the Fluid Mosaic Model?
 STOP
 QUIZ
-Q
-R
-S
-T
-2
+The expulsion of cholesterol
+The movement of ATP through a cell membrane
+Proteins and lipids moving side to side in a membrane
+The Fluid Mosaic Model captures all aspects of the CELL MEMBRANE
+3
 membraneSuccessB
 membraneFail

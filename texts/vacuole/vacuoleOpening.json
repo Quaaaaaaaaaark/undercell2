@@ -1,11 +1,14 @@
-A VACUOLE appears!
-Vacuole: Question 1, select h
+POLYCHEFTIDE: Oh? Ah, a guest!
+POLYCHEFTIDE: Can I interest you in some fine salts? Or perhaps a few carbohydrates?
+POLYCHEFTIDE: What's that? You wish to learn about our fine dining establishments, the VACUOLES?
+POLYCHEFTIDE: Well, I would be happy to assist. Here in the VACUOLE, no guest leaves unhappy!
+POLYCHEFTIDE: Firstly, can you tell me what the main function of our VACUOLE is?
 STOP
 QUIZ
-H
-I
-J
-K
-1
+Storing a wide variety of molecules
+Maintaining the cell's turgot pressure
+Isolating and containing harmful or waste products
+All of the above
+4
 vacuoleSuccessA
 vacuoleFail

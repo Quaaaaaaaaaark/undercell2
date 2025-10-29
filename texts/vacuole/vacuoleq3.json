@@ -1,10 +1,12 @@
-Vacuole: Question 3, select the letter containing the playtester's soul
+POLYCHEFTIDE: Ready to continue already? Of course, chef.
+POLYCHEFTIDE: Might I offer you some sucrose alongside your next question?
+POLYCHEFTIDE: What is the relationship between VACUOLES and VESICLES?
 STOP
 QUIZ
-H
-I
-J
-K
-3
+Vacuoles are often larger, and vesicles bring materials to them
+Vesicles are often larger and, transport the vacuoles to where they are needed
+Vacuoles are often larger, and use their materials to create vesicles
+Vesicles are often larger, and become vacuoles after consuming materials
+1
 vacuoleSuccessC
 vacuoleFail

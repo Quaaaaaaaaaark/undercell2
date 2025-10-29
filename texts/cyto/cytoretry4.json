@@ -1,10 +1,14 @@
-CYTOPLASM: Retry the final question. Are you doing this on purpose?
+CYBIL: You know, you're really close to achieving this goal of yours!
+CYBIL: Best goal I ever achieved was back in...
+CYBIL: Ah, I've seen you zoning out. I won't bore ya further! Someday you'll understand just how interesting an old protein's life can be.
+CYBIL: Anyway, what was that question again? 
+CYBIL: Oh, yes! Here it is, which of the following aren't CYTOPLASMIC INCLUSIONS found in some CELL CYTOPLASM?
 STOP
 QUIZ
-S
-M
-U
-V
-2
+Glycogen globules (glucose storage)
+Lipid droplets (fat and oil storage)
+Crystals (crystalline protein structures)
+Nucleosomes (nucleotide storage)
+3
 cytoSuccessD
 cytoFail

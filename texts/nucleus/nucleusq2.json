@@ -1,10 +1,14 @@
-Nucleus: Question 2, choose B
+BOB: All done?
+BOB: Good. Now go and file a TCA-32 form for DNA transcription, CGU-5 for RNA assignment, T-271 for rookie transcription records, CAT-30 for...
+BOB: ...
+BOB: Or maybe I'll just take care of that for you. Now, your next question.
+BOB: What is the structure of the nucleus?
 STOP
 QUIZ
-A
-B
-C
-D
-2
+Large sphere with two membranes, filled with nucleoplasm
+Large sphere with one phospholipid bilayer, filled with nucleoplasm
+Large sphere with one phospholipid layer, hollow save for DNA
+Large membraneless sphere, hollow save for DNA
+1
 nucleusSuccessB
 nucleusFail

@@ -1,10 +1,12 @@
-Lysosome: Retry question 3, select F
+LYSONDER: This shall be a close one, won't it?
+LYSONDER: Well, far be it from me to stand in your way.
+LYSONDER: Tell me now, what role does a LYSOSOME play in the event of apoptosis, or programmed cell death?
 STOP
 QUIZ
-AB
-CD
-E
-F
+Search for larger lysosomes to be broken down inside until only one remains
+Release protease enzymes into the cytoplasm to break it down
+Begin tracking down and consuming smaller organelles such as ribosomes
+Consume the nucleus in one final act
 4
 lysoSuccessC
 lysoFail

@@ -1,11 +1,12 @@
-Mitochondria: Retry the first question
-Mitochondria: Select A
+MIGHTY MITO: That was some good dodging. Now, ready to give this another try?
+MIGHTY MITO: The MITOCHONDRIA is noble and humble - of course we'd give you another shot.
+MIGHTY MITO: What is the structure of the MITOCHONDRIA?
 STOP
 QUIZ
-A
-B
-C
-D
+A separate folded outer and smooth inner membrane
+A separate smooth outer and folded inner membrane
+A folded inner membrane surrounded by a phospholipid bilayer
+A smooth inner membrane surrounded by a phospholipid bilayer
 1
 mitoSuccessA
 mitoFail

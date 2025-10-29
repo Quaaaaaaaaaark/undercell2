@@ -1,10 +1,12 @@
-Nucleus: Retry q2, pick B
+BOB: Alright, let's give this another shot. 
+BOB: Sooner you answer, sooner I can catch up on my nucleotide filings.
+BOB: What would you say is the structure of the NUCLEUS?
 STOP
 QUIZ
-A
-B
-C
-D
-2
+Large sphere with two membranes, filled with nucleoplasm
+Large sphere with one phospholipid bilayer, filled with nucleoplasm
+Large sphere with one phospholipid layer, hollow save for DNA
+Large membraneless sphere, hollow save for DNA
+1
 nucleusSuccessB
 nucleusFail

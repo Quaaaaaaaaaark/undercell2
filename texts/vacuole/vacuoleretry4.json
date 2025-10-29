@@ -1,11 +1,12 @@
-Vacuole: Retry the final question.
-Vacuole: I know you fear the CURSE, but to progress you must select THE CURSED ONE
+POLYCHEFTIDE: You're so close, chef!
+POLYCHEFTIDE: Just one more try, I know you can do it!
+POLYCHEFTIDE: Which of the following is NOT generally stored in a VACUOLE?
 STOP
 QUIZ
-H
-I
-J
-M
-4
+Carbohydrates, like sugars
+Various proteins and minerals
+ATP
+Pigments
+3
 vacuoleSuccessD
 vacuoleFail

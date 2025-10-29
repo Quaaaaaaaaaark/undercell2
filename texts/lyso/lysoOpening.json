@@ -1,11 +1,14 @@
-The LYSOSOME appears!
-Lysosome: Select A
+LYSONDER blocks your way!
+LYSONDER: So... it is you who would face the wrath of the LYSOSOMES...
+LYSONDER: And for what? Information? Is that really worth the risk?
+LYSONDER: Consider me... amused. How dedicated are you to this pursuit of knowledge?
+LYSONDER: Could you tell me, for instance, what the purpose of our LYSOSOMES are?
 STOP
 QUIZ
-A
-B
-C
-D
+Degrading macromolecules and removing unnecessary materials
+Transporting waste products out of the cell
+Consuming molecules to convert to usable ATP energy
+Chasing me around for no good reason?
 1
 lysoSuccessA
 lysoFail

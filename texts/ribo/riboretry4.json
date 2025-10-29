@@ -1,10 +1,12 @@
-Ribosome: Retry the final question. Are you being serious right now?
+RIBOONE: One more retry. Surely you can get it right this time?
+RIBOONE: I'm falling behind on my work, so I'd appreciate it if you went quickly.
+RIBOONE: In which of these locations can you NOT, I repeat NOT, find RIBOSOMES?
 STOP
 QUIZ
-T
-U
-V
-M
+Floating in the cytoplasm
+Attatched to the nucleus
+Attatched to the rough endoplasmic reticulum
+Attatched to the smooth endoplasmic reticulum
 4
 riboSuccessD
 riboFail

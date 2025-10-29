@@ -1,12 +1,27 @@
-Narrator: A VESICLE appears!
-Vesicle: Insert vesicle opening text here
-Vesicle: Pick answer A
+You are surrounded by four eager VESICLE vendors.
+VESICLIVE: Hello there! What can I do for ya?
+VESICLEO: Over here, over here! No vesicle is faster!
+VESICLINT: Don't listen to them - my vesicle services are the best in the cell!
+VESICLARA: Hey, just between you and me, his vesicle is old and breaking down. MY vesicle came out of the membrane just yesterday!
+VESICLIVE: What was that?
+VESICLEO: You aren't looking for a ride?
+VESICLINT: You just want to learn about VESICLES?
+VESICLARA: Well, that's a shame!
+VESICLIVE: I'd be happy to help you out! I doubt any of these other VESICLE vendors would give you any passing thought-
+VESICLEO: Of course! Of course! Just step over here and I'll teach you all about-
+VESICLINT: Nobody knows more about the VESICLES than me! Come talk to me and I'm sure you'll see-
+VESICLARA: Ignore them! I'd love to help you out, I've got better rates than any of-
+VESICLIVE: EVERYBODY QUIET! This isn't going anywhere.
+VESICLEO: It occurs to me that we may need to work together on this.
+VESICLINT: Perhaps you'd learn more from the four of us together than any of us separately.
+VESICLARA: And perhaps it would be good to keep us away from each other's throats for a few moments.
+VESICLINT: Let's start by figuring out what you already know. Can you tell me what the purpose of our vesicles is?
 STOP
 QUIZ
-A
-B
-C
-D
-1
+Providing bases for other organelles to build off of
+Filling gaps in cell membranes
+Transporting materials into, out of, and throughout cells
+All of the above
+3
 vesicleSuccessA
 vesicleFail
