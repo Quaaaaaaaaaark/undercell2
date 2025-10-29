@@ -33,9 +33,9 @@ public class Main {
 		knowledge = 0;
 		prevKnowledge = 0;
 		health = 8;
-		Main.status = "riboGame";
-		Main.substate = "textbox";
-		addToTextList("riboOpening");
+		Main.status = "mapSelect";
+		Main.substate = "menu"; // switch to textbox to have game work
+		addToTextList("intfilOpening");
 		frame.add(jonathan);
 		frame.pack();
 		frame.setVisible(true);

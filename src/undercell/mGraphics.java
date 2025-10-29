@@ -8,8 +8,12 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.font.TextLayout;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -48,6 +52,9 @@ public class mGraphics extends JPanel implements Runnable{
 	protected HeartBox heart;
 	protected FlappyBox flappy;
 	protected GridBox grid;
+	protected int menu_selector_i;
+	protected int walk_cycle;
+	
 	
 	public mGraphics(Main main, JFrame frame, ArrayList<String> textList) {
 		this.main = main;
@@ -57,6 +64,7 @@ public class mGraphics extends JPanel implements Runnable{
 		timer = new MTimer();
 		rTimer = new MTimer();
 		rTimer.start();
+		walk_cycle = 0;
 	}
 	
 	public synchronized void start() {
@@ -127,7 +135,51 @@ public class mGraphics extends JPanel implements Runnable{
 			microfilGame();
 		} else if (Main.status.equals("intfilGame")) {
 			intfilGame();
+		} else if (Main.status.equals("mapSelect")) {
+			mapSelect();
+		} else if (Main.status.equals("credits")) {
+			credits();
 		}
+	}
+	
+	public void draw_list_of_strings(String[] l, int x, int y) {
+		g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/100));
+		for (int i = 0; i < l.length; i++) {
+			g.drawString(l[i], x, y+(i*20));
+		}
+	}
+	
+	public void credits() {
+		g.setColor(Color.black);
+		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+		String[] credits = {"Minigames: M Lind", "Start Menus and Additional Programming: Halie Karre", "Textures: Antimony Compton", "Questions: David Griffith", "Music: Rupert Smith"};
+		draw_list_of_strings(credits, 100, 100);
+	}
+	
+	public void mapSelect() {
+		String[] organelle_labels = {"Golgi Apperatus [][]", "Vesicle (o)", "Ribosome @*", "Mitochondria <#>", "Lysosome (,)", "ER {=", "Nucleus ( * )", "Vacuole [=]", "Membrane :==:", "Cytoplasm", "Microtubule 0=0", "Peroxisome (p)", "Microfiaments =x=", "Intermediate Filaments |||", "Credits"};
+		g.setColor(Color.black);
+		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
+		g.setColor(Color.cyan);
+		Ellipse2D.Double ellipse = new Ellipse2D.Double(10, 10, frame.getWidth()-10, frame.getHeight()-10);
+		g.fill(ellipse);
+		g.setColor(Color.white);
+		draw_list_of_strings(organelle_labels, 100, 100);
+		
+		
+		
+		Image player;
+		try {
+			player = ImageIO.read(new File("assets/misc_protein_1.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+		g.drawImage(player, 80, 100+(menu_selector_i-1)*20, 20, 20, null);
+		
+		walk_cycle++;
+		
 	}
 	
 	public void golgiGame() {
