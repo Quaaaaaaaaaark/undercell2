@@ -31,12 +31,77 @@ public class KeyInput extends KeyAdapter{
 	*/
 	
 	public void keyPressed(KeyEvent e) {
+		System.out.println("key");
 		if (Main.substate.equals("textbox")) {
 			if (main.textList.size() != 0 && mGraphics.animCounter < main.textList.get(0).length()*1.5) {
 				mGraphics.animCounter = mGraphics.round(main.textList.get(0).length()*1.5);
 			} else {
 				main.nextText();
 			}
+		} else if (Main.substate.equals("menu")) {
+			code = e.getKeyCode();
+			System.out.println("Test");
+			switch (code) {
+			
+			case 38:
+				jonathan.menu_selector_i = jonathan.menu_selector_i - 1;
+				return;
+			
+			case 40:
+				jonathan.menu_selector_i = jonathan.menu_selector_i + 1;
+				return;
+			case 10:
+				if (jonathan.menu_selector_i == 13) {
+					Main.status = "credits";
+					return;
+				}
+				Main.status = "textbox";
+				switch(jonathan.menu_selector_i) {
+				case 0:
+					Main.status = "golgiGame";
+					break;
+				case 1:
+					Main.status = "riboGame";
+					break;
+				case 2:
+					Main.status = "globuleGame";
+					break;
+				case 3:
+					Main.status = "mitoGame";
+					break;
+				case 4:
+					Main.status = "lysoGame";
+					break;
+				case 5:
+					Main.status = "erGame";
+					break;
+				case 6:
+					Main.status = "nucleusGame";
+					break;
+				case 7:
+					Main.status = "vacuoleGame";
+					break;
+				case 8:
+					Main.status = "membraneGame";
+					break;
+				case 9:
+					Main.status = "cytoGame";
+					break;
+				case 10:
+					Main.status = "peroxiGame";
+					break;
+				case 11:
+					Main.status = "microfilGame";
+					break;
+				case 12:
+					Main.status = "intfilGame";
+					break;
+				
+				}
+				
+				return;
+			}
+			
 		} else if (Main.substate.equals("quiz")) {
 			code = e.getKeyCode();
 			switch (code) {
@@ -130,6 +195,8 @@ public class KeyInput extends KeyAdapter{
 			}
 		}
 	}
+	
+	
 	
 	public void runGolgiGame() {
 		switch (code) {

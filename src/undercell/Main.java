@@ -33,8 +33,8 @@ public class Main {
 		knowledge = 0;
 		prevKnowledge = 0;
 		health = 8;
-		Main.status = "intfilGame";
-		Main.substate = "textbox";
+		Main.status = "mapSelect";
+		Main.substate = "menu"; // switch to textbox to have game work
 		addToTextList("intfilOpening");
 		frame.add(jonathan);
 		frame.pack();
