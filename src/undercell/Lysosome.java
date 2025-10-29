@@ -7,6 +7,7 @@ public class Lysosome {
 	protected double radius, runTime;
 	boolean chaser;
 	boolean circle;
+	String iAddress;
 	
 	//standard 16px, large 32px
 	//movement 8px/s

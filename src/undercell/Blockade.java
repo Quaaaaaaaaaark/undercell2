@@ -7,12 +7,14 @@ public class Blockade {
 	public static double removeBound, hitBoundL, hitBoundU;
 	public static boolean canChange;
 	protected boolean toRemove;
+	String image;
 	
 	public Blockade(int num) {
 		lane = num;
 		toRemove = false;
 		timer = new MTimer();
-		timer.start();
+		timer.start();	
+		image = mGraphics.randomProteinImage();
 	}
 	
 	public Blockade(int num, double wait) {
@@ -20,6 +22,7 @@ public class Blockade {
 		toRemove = false;
 		timer = new MTimer();
 		timer.start(wait);
+		image = mGraphics.randomProteinImage();
 	}
 	
 	public double get() {

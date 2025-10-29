@@ -4,7 +4,7 @@ public class NotPipe {
 	protected int x, topY, bottomY;
 	protected MTimer timer;
 	protected double wait;
-	protected int stoppedX;
+	protected int stoppedX, num;
 	
 	public NotPipe(int topY, int bottomY, double wait) {
 		this.topY = topY;
@@ -12,6 +12,7 @@ public class NotPipe {
 		this.wait = wait;
 		stoppedX = -1;
 		x = -1;
+		num = Main.random(1,2);
 	}
 	
 	public double get() {

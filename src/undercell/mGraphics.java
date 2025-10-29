@@ -133,7 +133,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void golgiGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("golgiapparatus.jpg");
+		drawEnemy("golgi");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -230,10 +230,19 @@ public class mGraphics extends JPanel implements Runnable{
 			}
 		}
 		try {
-			Image image = ImageIO.read(new File("assets/" + address));
-			g.drawImage(image, frameWidth()*5/12, frameHeight()/8, frameWidth()/6, frameHeight()/4, null);
+			Image image = ImageIO.read(new File("assets/organelle/" + address + ".png"));
+			int w = frameWidth()/6;
+			int x = frameWidth()*5/12;
+			if(Main.status.equals("lysoGame")||Main.status.equals("peroxiGame")) {
+				w = frameHeight()/4;
+			} else {
+				w = frameHeight()/2;
+			}
+			x = frameWidth()/2 - w/2;
+			g.drawImage(image, x, frameHeight()/8, w, frameHeight()/4, null);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("assets/organelle/" + address + ".png");
 			System.out.println("Stop trying to make me download incomprehensible images of eldritch cell horrors!");
 		}
 	}
@@ -486,50 +495,51 @@ public class mGraphics extends JPanel implements Runnable{
 		int orbLength = length/5;
 		g.setColor(Color.white);
 		g.drawLine(boxX + (length/2) - (orbLength*3/4), boxY + length - (orbLength/2), boxX + (length/2) + (orbLength*3/4), boxY + length - (orbLength/2));
-		g.setColor(Color.blue);
-		g.drawOval(boxX - length/2, boxY + length - orbLength - amount, orbLength, orbLength);
-		g.setColor(Color.green);
-		g.drawOval(boxX + length + length/2 - orbLength, boxY + length - orbLength - amount, orbLength, orbLength);
-		if (Main.knowledge >= 2) {
-			g.setColor(Color.yellow);
-			g.drawOval(boxX - length/2, boxY + length - (orbLength*3) - amount, orbLength, orbLength);
-		}
-		if (Main.knowledge == 3) {
-			g.setColor(Color.red);
-			g.drawOval(boxX + length + length/2 - orbLength, boxY + length - (orbLength*3) - amount, orbLength, orbLength);
-		}
-		int realOrbLength = orbLength*9/10;
-		int orbEdge = boxX + (length/2) - (realOrbLength/2);
-		if (orbs.size() >= 2) {
-			g.setColor(orbColor(1));
-			g.fillOval(orbEdge, boxY + length - orbLength/2 - realOrbLength/2, realOrbLength, realOrbLength);
-			drawArrow(orbs.get(1), boxX + (length/2), boxY + length - orbLength/2, realOrbLength*7/10);
-		}
-		if (orbs.size() >= 3) {
-			g.setColor(orbColor(2));
-			g.fillOval(orbEdge, boxY + length - orbLength*3/2 - realOrbLength/2, realOrbLength, realOrbLength);
-			drawArrow(orbs.get(2), boxX + (length/2), boxY + length - orbLength*3/2, realOrbLength*7/10);
-		}
-		if (orbs.size() >= 4) {
-			g.setColor(orbColor(3));
-			g.fillOval(orbEdge, boxY + length - orbLength*5/2 - realOrbLength/2, realOrbLength, realOrbLength);
-			drawArrow(orbs.get(3), boxX + (length/2), boxY + length - orbLength*5/2, realOrbLength*7/10);
-		}
-		if (orbs.size() >= 5) {
-			g.setColor(orbColor(4));
-			g.fillOval(orbEdge, boxY + length - orbLength*7/2 - realOrbLength/2, realOrbLength, realOrbLength);
-			drawArrow(orbs.get(4), boxX + (length/2), boxY + length - orbLength*7/2, realOrbLength*7/10);
-		}
-		if (orbs.size() >= 6) {
-			g.setColor(orbColor(5));
-			g.fillOval(orbEdge, boxY + length - orbLength*9/2 - realOrbLength/2, realOrbLength, realOrbLength);
-			drawArrow(orbs.get(5), boxX + (length/2), boxY + length - orbLength*9/2, realOrbLength*7/10);
-		}
-		if (orbs.get(0) != null) {
-			g.setColor(orbColor(0));
-			int orbX = getOrbX(orbs.get(0), boxX, length, orbLength);
-			int orbY = getOrbY(orbs.get(0), boxY, length, orbLength, amount);
-			g.fillOval(orbX, orbY, realOrbLength, realOrbLength);
+		Image image;
+		try {
+			image = ImageIO.read(new File("assets/danceArrows/golgi_empty_circle_left.png"));
+			g.drawImage(image, boxX - length/2, boxY + length - orbLength - amount, orbLength, orbLength, null);
+			image = ImageIO.read(new File("assets/danceArrows/golgi_empty_circle_right.png"));
+			g.drawImage(image, boxX + length + length/2 - orbLength, boxY + length - orbLength - amount, orbLength, orbLength, null);
+			if (Main.knowledge >= 2) {
+				image = ImageIO.read(new File("assets/danceArrows/golgi_empty_circle_up.png"));
+				g.drawImage(image, boxX - length/2, boxY + length - (orbLength*3) - amount, orbLength, orbLength, null);
+			}
+			if (Main.knowledge == 3) {
+				image = ImageIO.read(new File("assets/danceArrows/golgi_empty_circle_down.png"));
+				g.drawImage(image, boxX + length + length/2 - orbLength, boxY + length - (orbLength*3) - amount, orbLength, orbLength, null);
+			}
+			int realOrbLength = orbLength*9/10;
+			int orbEdge = boxX + (length/2) - (realOrbLength/2);
+			if (orbs.size() >= 2) {
+				image = (orbColor(1));
+				g.drawImage(image, orbEdge, boxY + length - orbLength/2 - realOrbLength/2, realOrbLength, realOrbLength, null);
+			}
+			if (orbs.size() >= 3) {
+				image = (orbColor(2));
+				g.drawImage(image, orbEdge, boxY + length - orbLength*3/2 - realOrbLength/2, realOrbLength, realOrbLength, null);
+			}
+			if (orbs.size() >= 4) {
+				image = (orbColor(3));
+				g.drawImage(image, orbEdge, boxY + length - orbLength*5/2 - realOrbLength/2, realOrbLength, realOrbLength, null);
+			}
+			if (orbs.size() >= 5) {
+				image = (orbColor(4));
+				g.drawImage(image, orbEdge, boxY + length - orbLength*7/2 - realOrbLength/2, realOrbLength, realOrbLength, null);
+			}
+			if (orbs.size() >= 6) {
+				image = (orbColor(5));
+				g.drawImage(image, orbEdge, boxY + length - orbLength*9/2 - realOrbLength/2, realOrbLength, realOrbLength, null);
+			}
+			if (orbs.get(0) != null) {
+				image = (orbColorFill(0));
+				int orbX = getOrbX(orbs.get(0), boxX, length, orbLength);
+				int orbY = getOrbY(orbs.get(0), boxY, length, orbLength, amount);
+				g.drawImage(image, orbX, orbY, orbLength, orbLength, null);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("no no bad");
 		}
 	}
 	
@@ -537,10 +547,10 @@ public class mGraphics extends JPanel implements Runnable{
 		switch (orb) {
 		case "left":
 		case "up":
-			return (boxX - length/2) + (orbLength/2) - ((orbLength*9/10)/2);
+			return (boxX - length/2);
 		case "down":
 		case "right":
-			return (boxX + length + length/2 - orbLength) + (orbLength/2) - ((orbLength*9/10)/2);
+			return (boxX + length + length/2 - orbLength);
 		}
 		return -1;
 	}
@@ -549,26 +559,34 @@ public class mGraphics extends JPanel implements Runnable{
 		switch (orb) {
 		case "left":
 		case "right":
-			return (boxY + length - orbLength - amount) + (orbLength/2) - ((orbLength*9/10)/2);
+			return (boxY + length - orbLength - amount);
 		case "up":
 		case "down":
-			return (boxY + length - (orbLength*3) - amount) + (orbLength/2) - ((orbLength*9/10)/2);
+			return (boxY + length - (orbLength*3) - amount);
 		}
 		return -1;
 	}
 	
-	public Color orbColor(int num) {
-		switch (orbs.get(num)) {
-		case "left":
-			return Color.blue;
-		case "right":
-			return Color.green;
-		case "up":
-			return Color.yellow;
-		case "down":
-			return Color.red;
+	public Image orbColor(int num) {
+		try {
+			Image i = ImageIO.read(new File("assets/danceArrows/golgi_arrow_" + orbs.get(num) + ".png"));
+			return i;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO PLEAAAAASE");
 		}
-		return Color.white;
+		return null;
+	}
+	
+	public Image orbColorFill(int num) {
+		try {
+			Image i = ImageIO.read(new File("assets/danceArrows/golgi_filled_circle_" + orbs.get(num) + ".png"));
+			return i;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO PLEAAAAASE");
+		}
+		return null;
 	}
 	
 	
@@ -722,7 +740,7 @@ public class mGraphics extends JPanel implements Runnable{
 			g.fillRect(barX, barY, (int) (barWidth * ((double)Main.health/3)), barHeight);
 		}
 		try {
-			Image image = ImageIO.read(new File("assets/heart-icon.png"));
+			Image image = ImageIO.read(new File("assets/hp_heart.png"));
 			g.drawImage(image, heartX, barY - amount, heartLength, heartLength, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -751,7 +769,7 @@ public class mGraphics extends JPanel implements Runnable{
 			g.fillRect(barX, barY, (int) (barWidth * ((double)Main.health/amt)), barHeight);
 		}
 		try {
-			Image image = ImageIO.read(new File("assets/heart-icon.png"));
+			Image image = ImageIO.read(new File("assets/hp_heart.png"));
 			g.drawImage(image, heartX, barY - amount, heartLength, heartLength, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -762,7 +780,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void vesicleGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("vesicle");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -798,7 +816,7 @@ public class mGraphics extends JPanel implements Runnable{
 			}
 			drawHealthBar();
 		} else if (Main.substate.equals("game")) {
-			drawEnemySide("vesicle.jpg");
+			drawEnemySide("vesicle");
 			VesicleStats.timeSinceMoved++;
 			if (VesicleStats.timeSinceMoved == 4) {
 				VesicleStats.lane += VesicleStats.moveDir;
@@ -814,7 +832,7 @@ public class mGraphics extends JPanel implements Runnable{
 				setUpBlockades();
 				timer.start();
 			} 
-			drawMovingEnemySide("vesicle.jpg");
+			drawMovingEnemySide("vesicle");
 			drawMovingBoxV();
 			drawHealthBar();
 		} else if (Main.substate.equals("postgame")) {
@@ -828,11 +846,11 @@ public class mGraphics extends JPanel implements Runnable{
 					main.addToTextList("vesicleq" + (Main.knowledge + 1));
 				}
 				Main.substate = "textbox";
-				drawEnemy("vesicle.jpg");
+				drawEnemy("vesicle");
 				drawEmptyTextBox();
 				drawHealthBar();
 			} else {
-			drawMovingEnemySideB("vesicle.jpg");
+			drawMovingEnemySideB("vesicle");
 			drawMovingBoxVB();
 			drawHealthBar();
 			}
@@ -935,7 +953,7 @@ public class mGraphics extends JPanel implements Runnable{
 		x -= length/2;
 		int y = boxY + round((boxHeight - (boxHeight/7))*b.get()/Blockade.timeToHit);
 		try {
-			Image image = ImageIO.read(new File("assets/blockade-stand-in.png"));
+			Image image = ImageIO.read(new File(b.image));
 			g2.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -967,7 +985,7 @@ public class mGraphics extends JPanel implements Runnable{
 		x -= length/2;
 		
 		try {
-			Image image = ImageIO.read(new File("assets/vesicle.jpg"));
+			Image image = ImageIO.read(new File("assets/glob.png"));
 			g.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -977,8 +995,9 @@ public class mGraphics extends JPanel implements Runnable{
 	
 	public void drawEnemySide(String address) {
 		try {
-			Image image = ImageIO.read(new File("assets/" + address));
-			g.drawImage(image, frameWidth()/4, frameHeight()*3/8, frameWidth()/6, frameHeight()/4, null);
+			int w = frameHeight()/2;
+			Image image = ImageIO.read(new File("assets/organelle/" + address + ".png"));
+			g.drawImage(image, frameWidth()/4 + frameWidth()/12 - w/2, frameHeight()*3/8, w, frameHeight()/4, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Stop moving! You're supposed to stand in one place and fight each other! Dodging is cheating!");
@@ -1045,8 +1064,9 @@ public class mGraphics extends JPanel implements Runnable{
 		int x = frameWidth()*5/12 - round(((frameWidth()*5/12) - (frameWidth()/4))*((double)animCounter/30));
 		int y = frameHeight()/8 + round((frameHeight()/4)*((double)animCounter/30));
 		try {
-			Image image = ImageIO.read(new File("assets/" + address));
-			g.drawImage(image, x, y, frameWidth()/6, frameHeight()/4, null);
+			int w = frameHeight()/2;
+			Image image = ImageIO.read(new File("assets/organelle/" + address + ".png"));
+			g.drawImage(image, x + frameWidth()/12 - w/2, y, w, frameHeight()/4, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("error:_location:_motion_reason:_was-tired_punishment:_eternal-torment");
@@ -1057,8 +1077,9 @@ public class mGraphics extends JPanel implements Runnable{
 		int x = frameWidth()/4 + round(((frameWidth()*5/12) - (frameWidth()/4))*((double)animCounter/30));
 		int y = frameHeight()*3/8 -  round((frameHeight()/4)*((double)animCounter/30));
 		try {
-			Image image = ImageIO.read(new File("assets/" + address));
-			g.drawImage(image, x, y, frameWidth()/6, frameHeight()/4, null);
+			int w = frameHeight()/2;
+			Image image = ImageIO.read(new File("assets/organelle/" + address + ".png"));
+			g.drawImage(image, x + frameWidth()/12 - w/2, y, w, frameHeight()/4, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("tnemrot-lanrete_:tnemhsinup_derit-saw_:nosear_noitom_:noitacol_:rorre");
@@ -1098,7 +1119,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void riboGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("ribo");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -1139,7 +1160,7 @@ public class mGraphics extends JPanel implements Runnable{
 					i--;
 				}
 			}
-			drawEnemySide("vesicle.jpg");
+			drawEnemySide("ribo");
 			drawRiboGame();
 			drawHealthBar(8);
 		} else if (Main.substate.equals("gameCount")) {
@@ -1151,7 +1172,7 @@ public class mGraphics extends JPanel implements Runnable{
 				setUpArrows();
 				timer.start();
 			} 
-			drawMovingEnemySide("vesicle.jpg");
+			drawMovingEnemySide("ribo");
 			drawMovingBoxV();
 			drawHealthBar(8);
 		} else if (Main.substate.equals("postgame")) {
@@ -1165,11 +1186,11 @@ public class mGraphics extends JPanel implements Runnable{
 					main.addToTextList("riboq" + (Main.knowledge + 1));
 				}
 				Main.substate = "textbox";
-				drawEnemy("vesicle.jpg");
+				drawEnemy("ribo");
 				drawEmptyTextBox();
 				drawHealthBar(8);
 			} else {
-			drawMovingEnemySideB("vesicle.jpg");
+			drawMovingEnemySideB("ribo");
 			drawMovingBoxVB();
 			drawHealthBar(8);
 			}
@@ -1238,23 +1259,28 @@ public class mGraphics extends JPanel implements Runnable{
 	
 	public void drawArrow(Graphics2D g2, DanceArrow a, int length, int laneLength, int boxX, int boxY, int boxWidth, int boxHeight) {
 		int x = -1;
+		String dir = "";
 		switch (a.dir) {
 		case "l":
+			dir = "left";
 			x = boxX + laneLength - length/2;
 			break;
 		case "d":
+			dir = "down";
 			x = boxX + laneLength*2 - length/2;
 			break;
 		case "u":
+			dir = "up";
 			x = boxX + boxWidth - laneLength*2 - length/2;
 			break;
 		case "r":
+			dir = "right";
 			x = boxX + boxWidth - laneLength - length/2;
 			break;
 		}
 		int y = boxY + round((boxHeight - boxHeight/7)*a.get()/DanceArrow.timeToReach);
 		try {
-			Image image = ImageIO.read(new File("assets/danceArrows/dance-arrow-" + a.dir + ".png"));
+			Image image = ImageIO.read(new File("assets/danceArrows/golgi_arrow_" + dir + ".png"));
 			g2.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1264,7 +1290,7 @@ public class mGraphics extends JPanel implements Runnable{
 	
 	public void setUpArrows() {
 		arrows = new ArrayList<DanceArrow>();
-		if (Main.knowledge == 1) {
+		if (Main.knowledge == 1 || Main.knowledge == 0) {
 			double[] vals = getDanceStructure1();
 			for (int i = 0; i<vals.length; i++) {
 				arrows.add(new DanceArrow(randDir(), vals[i]));
@@ -1400,7 +1426,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void globuleGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("globule");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -1682,7 +1708,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void mitoGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("mito");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -1833,7 +1859,7 @@ public class mGraphics extends JPanel implements Runnable{
 		int x = boxX + round(jumpy.x*px);
 		int y = boxY + boxLength - round(jumpy.getY()*px);
 		try {
-			Image image = ImageIO.read(new File("assets/player-stand-in.jpg"));
+			Image image = ImageIO.read(new File("assets/glob.png"));
 			g.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1861,7 +1887,7 @@ public class mGraphics extends JPanel implements Runnable{
 			a.toRemove = true;
 		}
 		try {
-			Image image = ImageIO.read(new File("assets/blockade-stand-in.png"));
+			Image image = ImageIO.read(new File("assets/ATP.png"));
 			g2.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1887,7 +1913,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void lysoGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("lyso");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -2160,7 +2186,7 @@ public class mGraphics extends JPanel implements Runnable{
 		int x = boxX + round(px*heart.x);
 		int y = boxY + round(px*heart.y);
 		try {
-			Image image = ImageIO.read(new File("assets/player-stand-in.jpg"));
+			Image image = ImageIO.read(new File("assets/glob.png"));
 			g.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -2173,7 +2199,7 @@ public class mGraphics extends JPanel implements Runnable{
 		int x = boxX + round(px*heart.x);
 		int y = boxY + round(px*heart.y);
 		try {
-			Image image = ImageIO.read(new File("assets/bouncer-stand-in.png"));
+			Image image = ImageIO.read(new File("assets/glob.png"));
 			g.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -2278,31 +2304,44 @@ public class mGraphics extends JPanel implements Runnable{
 		try {
 			Image image;
 			if (l instanceof FallProt) {
-				image = ImageIO.read(new File("assets/blockade-stand-in.png"));
+				image = ImageIO.read(new File(l.iAddress));
 			} else if (l instanceof MemMol) {
 				if (((MemMol)l).good) {
-					image = ImageIO.read(new File("assets/danceArrows/dance-arrow-r.png"));
-				} else if (l instanceof CytoBlock) {
-					image = ImageIO.read(new File("assets/blockade-stand-in.png"));
+					image = ImageIO.read(new File("assets/mist_protein_3.png"));
 				} else {
-					image = ImageIO.read(new File("assets/blockade-stand-in.png"));
+					image = ImageIO.read(new File("assets/phytanic_acid.png"));
 				}
+			} else if (l instanceof CytoBlock) {
+				image = ImageIO.read(new File(l.iAddress));
 			} else if (l instanceof TubuleBit) {
-				image = ImageIO.read(new File("assets/blockade-stand-in.png"));
+				image = ImageIO.read(new File(l.iAddress));
 			} else if (l instanceof ShootyProt) {
 				if (((ShootyProt)l).oxidized) {
-					image = ImageIO.read(new File("assets/danceArrows/dance-arrow-r.png"));
+					image = ImageIO.read(new File("assets/pristanic_acid.png"));
 				} else {
-					image = ImageIO.read(new File("assets/blockade-stand-in.png"));
+					image = ImageIO.read(new File("assets/phytanic_acid.png"));
 				}
 			} else {
-				image = ImageIO.read(new File("assets/lysosome-stand-in.png"));
+				image = ImageIO.read(new File("assets/lysosome_obstacle.png"));
 			}
 			g2.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("lies.\n\n\nosomes.\n\n\n");
 		}
+	}
+	
+	public static String randomProteinImage() {
+		switch (Main.random(0,2)) {
+		case 0:
+			return "assets/misc_protein_1.png";
+		case 1:
+			return "assets/misc_protein_2.png";
+		case 2:
+			return "assets/misc_protein_3.png";
+		}
+		System.out.println("nooo im so fuckin tired whyyy");
+		return "blah";
 	}
 	
 	
@@ -2351,7 +2390,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void erGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("er");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -2596,7 +2635,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void nucleusGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("nucleus");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -2631,7 +2670,7 @@ public class mGraphics extends JPanel implements Runnable{
 			}
 			drawHealthBar();
 		} else if (Main.substate.equals("game")) {
-			drawEnemySide("vesicle.jpg");
+			drawEnemySide("nucleus");
 			drawNucleusGame(Color.black);
 			drawHealthBar();
 		} else if (Main.substate.equals("gameCount")) {
@@ -2643,11 +2682,11 @@ public class mGraphics extends JPanel implements Runnable{
 				setUpNucleotides();
 				timer.start();
 			} 
-			drawMovingEnemySide("vesicle.jpg");
+			drawMovingEnemySide("nucleus");
 			drawMovingBoxV();
 			drawHealthBar();
 		} else if (Main.substate.equals("gameCorrect")){
-			drawEnemySide("vesicle.jpg");
+			drawEnemySide("nucleus");
 			drawNucleusGame(Color.green);
 			drawHealthBar();
 			if (timer.get() >= 1) {
@@ -2656,7 +2695,7 @@ public class mGraphics extends JPanel implements Runnable{
 				animCounter = 0;
 			}
 		} else if (Main.substate.equals("gameWrong")) {
-			drawEnemySide("vesicle.jpg");
+			drawEnemySide("nucleus");
 			drawNucleusGame(Color.red);
 			drawHealthBar();
 			if (timer.get() >= 1) {
@@ -2679,11 +2718,11 @@ public class mGraphics extends JPanel implements Runnable{
 					main.addToTextList("nucleusq" + (Main.knowledge + 1));
 				}
 				Main.substate = "textbox";
-				drawEnemy("vesicle.jpg");
+				drawEnemy("nucleus");
 				drawEmptyTextBox();
 				drawHealthBar();
 			} else {
-			drawMovingEnemySideB("vesicle.jpg");
+			drawMovingEnemySideB("nucleus");
 			drawMovingBoxVB();
 			drawHealthBar();
 			}
@@ -2828,14 +2867,14 @@ public class mGraphics extends JPanel implements Runnable{
 		g.fillRect(boxX, boxY, boxWidth, boxHeight);
 		int nucleoHeight = boxHeight/6;
 		if (Main.knowledge <= 1) {
-			drawNucleoSample(Color.red, "A", boxX  + boxWidth + laneWidth*3 + laneWidth/2, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
-			drawNucleoSample(Color.red, "A", boxX + boxWidth + laneWidth/2, boxY + boxHeight - nucleoHeight*2, laneWidth, nucleoHeight);
-			drawNucleoSample(Color.magenta, "U", boxX  + boxWidth + laneWidth*3 + laneWidth/2, boxY + boxHeight - nucleoHeight*2, laneWidth, nucleoHeight);
-			drawNucleoSample(Color.yellow, "T", boxX + boxWidth + laneWidth/2, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
-			drawNucleoSample(Color.blue, "G", boxX + boxWidth + laneWidth*5, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
-			drawNucleoSample(Color.blue, "G", boxX + boxWidth + laneWidth*2, boxY + boxHeight - nucleoHeight*2, laneWidth, nucleoHeight);
-			drawNucleoSample(Color.green, "C", boxX + boxWidth + laneWidth*5, boxY + boxHeight - nucleoHeight*2, laneWidth, nucleoHeight);
-			drawNucleoSample(Color.green, "C", boxX + boxWidth + laneWidth*2, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
+			drawNucleoSample( "A", boxX  + boxWidth + laneWidth*3 + laneWidth/2, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
+			drawNucleoSample("A", boxX + boxWidth + laneWidth/2, boxY + boxHeight - nucleoHeight*2, laneWidth, nucleoHeight);
+			drawNucleoSample( "U", boxX  + boxWidth + laneWidth*3 + laneWidth/2, boxY + boxHeight - nucleoHeight*2, laneWidth, nucleoHeight);
+			drawNucleoSample( "T", boxX + boxWidth + laneWidth/2, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
+			drawNucleoSample( "G", boxX + boxWidth + laneWidth*5, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
+			drawNucleoSample( "G", boxX + boxWidth + laneWidth*2, boxY + boxHeight - nucleoHeight*2, laneWidth, nucleoHeight);
+			drawNucleoSample("C", boxX + boxWidth + laneWidth*5, boxY + boxHeight - nucleoHeight*2, laneWidth, nucleoHeight);
+			drawNucleoSample("C", boxX + boxWidth + laneWidth*2, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
 		}
 		drawSwapper(boxX, boxY, boxWidth, boxHeight, laneWidth);
 		for (int i = 0; i<endNucleotides.size(); i++) {
@@ -2903,7 +2942,22 @@ public class mGraphics extends JPanel implements Runnable{
 		g.fillPolygon(x, y, 6);
 	}
 	
-	public void drawNucleoSample(Color color, String letter, int x, int y, int width, int height) {
+	public void drawNucleoSample(String letter, int x, int y, int width, int height) {
+		letter = letter.toLowerCase();
+		System.out.println(letter);
+		try {
+			Image image;
+			if (letter.equals("u")) {
+				image = ImageIO.read(new File("assets/dnabits/rna_u.png"));
+			} else {
+				image = ImageIO.read(new File("assets/dnabits/dna_" + letter + ".png"));
+			}
+			g.drawImage(image, x, y, width, height, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("pleeeease i just wanna sleep");
+		}
+		/*
 		g.setColor(color);
 		g.fillRect(x, y, width, height);
 		int tHeight = height/2;
@@ -2915,25 +2969,38 @@ public class mGraphics extends JPanel implements Runnable{
 		TextLayout tl = new TextLayout(letter, g.getFont(), g.getFontRenderContext());
 		g.setColor(Color.black);
 		g.drawString(letter, x + width/2 - g.getFontMetrics().stringWidth(letter)/2, y + height/2 + round(tl.getBounds().getHeight()/2));
+		*/
 	}
 	
 	public void drawEndNucleotide(int index, int boxX, int boxY, int boxWidth, int boxHeight, int laneWidth) {
-		String type = endNucleotides.get(index);
-		g.setColor(getNTColor(type));
-		int x;
-		if (index >= endNucleotides.size()/2) {
-			x = boxX + boxWidth - laneWidth*(endNucleotides.size()-index);
-			if (index == endNucleotides.size()/2) {
-				laneWidth = ((boxX + boxWidth - laneWidth*(endNucleotides.size() - (index+1)))-(boxX + round(boxWidth/2)));
+		try {		
+			String type = endNucleotides.get(index);
+			type = type.toLowerCase();
+			Image image;
+			if (type.equals("u")){
+				image = ImageIO.read(new File("assets/dnabits/rna_u.png"));
+			} else {
+				image = ImageIO.read(new File("assets/dnabits/dna_" + type + ".png"));
 			}
-		} else {
-			x = boxX + laneWidth*index;
-			if (index == endNucleotides.size()/2 - 1) {
-				laneWidth = ((boxX + round(boxWidth/2)+1)-x);
+			int x;
+			if (index >= endNucleotides.size()/2) {
+				x = boxX + boxWidth - laneWidth*(endNucleotides.size()-index);
+				if (index == endNucleotides.size()/2) {
+					laneWidth = ((boxX + boxWidth - laneWidth*(endNucleotides.size() - (index+1)))-(boxX + round(boxWidth/2)));
+				}
+			} else {
+				x = boxX + laneWidth*index;
+				if (index == endNucleotides.size()/2 - 1) {
+					laneWidth = ((boxX + round(boxWidth/2)+1)-x);
+				}
 			}
+			int nucleoHeight = boxHeight/6;
+			g.drawImage(image, x, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("fuck u");
 		}
-		int nucleoHeight = boxHeight/6;
-		g.fillRect(x, boxY + boxHeight - nucleoHeight, laneWidth, nucleoHeight);
+		/*
 		g.setColor(Color.black);
 		int tHeight = nucleoHeight/2;
 		g.setFont(new Font("Consolas", Font.BOLD, tHeight));
@@ -2943,26 +3010,39 @@ public class mGraphics extends JPanel implements Runnable{
 		}
 		TextLayout tl = new TextLayout(type, g.getFont(), g.getFontRenderContext());
 		g.drawString(type, x + laneWidth/2 - g.getFontMetrics().stringWidth(type)/2, boxY + boxHeight - nucleoHeight/2 + round(tl.getBounds().getHeight()/2));
+		*/
 	}
 	
 	public void drawNucleotide(Graphics2D g2, int index, int boxX, int boxY, int boxWidth, int boxHeight, int laneWidth, double time) {
-		String type = nucleotides.get(index).get();
-		g2.setColor(getNTColor(type));
-		int x;
-		if (index >= endNucleotides.size()/2) {
-			x = boxX + boxWidth - laneWidth*(endNucleotides.size()-index);
-			if (index == endNucleotides.size()/2) {
-				laneWidth = ((boxX + boxWidth - laneWidth*(endNucleotides.size() - (index+1)))-(boxX + round(boxWidth/2)));
+			try {
+			String type = nucleotides.get(index).get();
+			type = type.toLowerCase();
+			Image image;
+			if (type.equals("u")){
+				image = ImageIO.read(new File("assets/dnabits/rna_u.png"));
+			} else {
+				image = ImageIO.read(new File("assets/dnabits/dna_" + type + ".png"));
 			}
-		} else {
-			x = boxX + laneWidth*index;
-			if (index == endNucleotides.size()/2 - 1) {
-				laneWidth = ((boxX + round(boxWidth/2)+1)-x);
+			int x;
+			if (index >= endNucleotides.size()/2) {
+				x = boxX + boxWidth - laneWidth*(endNucleotides.size()-index);
+				if (index == endNucleotides.size()/2) {
+					laneWidth = ((boxX + boxWidth - laneWidth*(endNucleotides.size() - (index+1)))-(boxX + round(boxWidth/2)));
+				}
+			} else {
+				x = boxX + laneWidth*index;
+				if (index == endNucleotides.size()/2 - 1) {
+					laneWidth = ((boxX + round(boxWidth/2)+1)-x);
+				}
 			}
+			int height = boxHeight/6;
+			int y = Math.min(boxY + round((boxHeight - height - height)*time/Nucleotide.timeToReach), boxY + boxHeight - height - height);
+			g2.drawImage(image, x, y, laneWidth, height, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("no REALLY fuck u");
 		}
-		int height = boxHeight/6;
-		int y = Math.min(boxY + round((boxHeight - height - height)*time/Nucleotide.timeToReach), boxY + boxHeight - height - height);
-		g2.fillRect(x, y, laneWidth, height);
+		/*
 		g2.setColor(Color.black);
 		int tHeight = height/2;
 		g2.setFont(new Font("Consolas", Font.BOLD, tHeight));
@@ -2972,6 +3052,7 @@ public class mGraphics extends JPanel implements Runnable{
 		}
 		TextLayout tl = new TextLayout(type, g2.getFont(), g2.getFontRenderContext());
 		g2.drawString(type, x + laneWidth/2 - g.getFontMetrics().stringWidth(type)/2, y + height/2 + round(tl.getBounds().getHeight()/2.0));
+		*/
 	}
 	
 	public Color getNTColor(String type) {
@@ -2994,7 +3075,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void vacuoleGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("vacuole");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -3172,7 +3253,7 @@ public class mGraphics extends JPanel implements Runnable{
 			break;
 		}
 		try {
-			Image image = ImageIO.read(new File("assets/player-stand-in.jpg"));
+			Image image = ImageIO.read(new File("assets/blob.png"));
 			g.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -3392,7 +3473,7 @@ public class mGraphics extends JPanel implements Runnable{
 	public void membraneGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("membrane");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -3582,7 +3663,7 @@ public void setUpMembraneMolecules() {
 	public void cytoGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("cyto");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -3833,7 +3914,7 @@ public void setUpMembraneMolecules() {
 	public void peroxisomeGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("peroxi");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -3941,7 +4022,7 @@ public void setUpMembraneMolecules() {
 					shootyProts.add(new ShootyProt(8,j, j, 20, 1+i*5));
 				}
 			}
-			for (int i = 6; i<=24; i+=6) {
+			for (int i = 6; i<=18; i+=6) {
 				shootyProts.add(new ShootyProt(Main.random(5,95), Main.random(5,95), 4, i));
 			}
 			break;
@@ -4057,7 +4138,7 @@ public void setUpMembraneMolecules() {
 	public void microtubuleGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("microtubule");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -4275,7 +4356,7 @@ public void setUpMembraneMolecules() {
 		int y = boxY + round(heart.y*px);
 		int length = round(8*px);
 		try {
-			Image image = ImageIO.read(new File("assets/player-stand-in.jpg"));
+			Image image = ImageIO.read(new File("assets/glob.png"));
 			g.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -4286,7 +4367,7 @@ public void setUpMembraneMolecules() {
 	public void microfilGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("microfil");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -4463,8 +4544,8 @@ public void setUpMembraneMolecules() {
 		int y = boxY + round(px*46);
 		int x = boxX + round(px*21);
 		try {
-			Image image = ImageIO.read(new File("assets/flappyCell/flappy-amoeba-stand-in.png"));
-			g.drawImage(image, x, y, length, length, null);
+			Image image = ImageIO.read(new File("assets/flappyCell/amoeba_blob.png"));
+			g.drawImage(image, x, y, length, length*2, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("got bored of waiting");
@@ -4473,7 +4554,7 @@ public void setUpMembraneMolecules() {
 	
 	public void drawFlappy(Graphics2D g2, double px, int boxX, int boxY) {
 		int length = round(px*8);
-		int height = length;
+		int height = length*2;
 		int x = boxX + round(px*21);
 		double time = flappy.get();
 		flappy.y = flappy.savedY - round((-160*Math.pow(time,2)) + (80*time));
@@ -4487,11 +4568,13 @@ public void setUpMembraneMolecules() {
 			flappy.ouchY = flappy.y;
 			timer.start();
 		}
-		String address = "assets/flappyCell/flappy-amoeba-stand-in.png";
+		String address = "assets/flappyCell/amoeba_blob.png";
+		//y -= round(height*0.5);
+		//height = round(height*1.5);
 		if (time <= .25) {
-			address = "assets/flappyCell/flappy-amoeba-pseudopod-stand-in.png";
-			y -= round(height*0.5);
-			height = round(height*1.5);
+			address = "assets/flappyCell/amoeba_move.png";
+			//y -= round(height*0.5);
+			//height = round(height*1.5);
 		}
 		try {
 			Image image = ImageIO.read(new File(address));
@@ -4506,8 +4589,9 @@ public void setUpMembraneMolecules() {
 		n.x = (100 - round(100*n.get()/FlappyBox.speed));
 		System.out.println(n.get());
 		int y1 = boxY;
-		int h1 = round(px*n.topY);
-		int h2 = round(px*100-n.bottomY);
+		int h = round(px*n.topY);
+		y1 = (y1 + h) - round(px*75);
+		h = round(px*75);
 		int y2 = boxY + round(px*n.bottomY);
 		int length = round(px*10);
 		int x = boxX + round(px*n.x);
@@ -4521,9 +4605,10 @@ public void setUpMembraneMolecules() {
 			timer.start();
 		}
 		try {
-			Image image = ImageIO.read(new File ("assets/dodge-bar-stand-in.png"));
-			g2.drawImage(image, x, y1, length, h1, null);
-			g2.drawImage(image, x, y2, length, h2, null);
+			Image image = ImageIO.read(new File ("assets/cell_tissue_obstacle_top_" + n.num + ".png"));
+			g2.drawImage(image, x, y1, length, h, null);
+			image = ImageIO.read(new File("assets/cell_tissue_obstacle_bottom_" + n.num + ".png"));
+			g2.drawImage(image, x, y2, length, h, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("flappy bird called they're suing us");
@@ -4555,7 +4640,7 @@ public void setUpMembraneMolecules() {
 		int y = boxY + round(px*flappy.y);
 		int length = round(px*8);
 		try {
-			Image image = ImageIO.read(new File("assets/flappyCell/flappy-amoeba-stand-in.png"));
+			Image image = ImageIO.read(new File("assets/flappyCell/amoeba_blob.png"));
 			g2.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -4566,14 +4651,16 @@ public void setUpMembraneMolecules() {
 	public void drawLockedPipe(Graphics2D g2, NotPipe n, double px, int boxX, int boxY) {
 		int x = boxX + round(px*n.stoppedX);
 		int y1 = boxY;
-		int h1 = round(px*n.topY);
-		int h2 = round(px*100-n.bottomY);
+		int h = round(px*n.topY);
+		y1 = (y1 + h) - round(px*75);
+		h = round(px*75);
 		int y2 = boxY + round(px*n.bottomY);
 		int length = round(px*10);
 		try {
-			Image image = ImageIO.read(new File ("assets/dodge-bar-stand-in.png"));
-			g2.drawImage(image, x, y1, length, h1, null);
-			g2.drawImage(image, x, y2, length, h2, null);
+			Image image = ImageIO.read(new File ("assets/cell_tissue_obstacle_top_" + n.num + ".png"));
+			g2.drawImage(image, x, y1, length, h, null);
+			image = ImageIO.read(new File ("assets/cell_tissue_obstacle_bottom_" + n.num + ".png"));
+			g2.drawImage(image, x, y2, length, h, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("oh fuck they can pick locks");
@@ -4583,7 +4670,7 @@ public void setUpMembraneMolecules() {
 	public void intfilGame() {
 		g.setColor(Color.black);
 		g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-		drawEnemy("vesicle.jpg");
+		drawEnemy("intfil");
 		if (Main.substate.equals("textbox")) {
 			if (textList.size() == 0) {
 				if (Main.postText.equals("quiz")) {
@@ -4874,7 +4961,7 @@ public void setUpMembraneMolecules() {
 			y = boxY + round(px*25*grid.y) - length/2;
 		}
 		try {
-			Image image = ImageIO.read(new File("assets/player-stand-in.jpg"));
+			Image image = ImageIO.read(new File("assets/glob.png"));
 			g.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();

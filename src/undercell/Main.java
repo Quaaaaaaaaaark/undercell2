@@ -33,9 +33,9 @@ public class Main {
 		knowledge = 0;
 		prevKnowledge = 0;
 		health = 8;
-		Main.status = "riboGame";
+		Main.status = "vesicleGame";
 		Main.substate = "textbox";
-		addToTextList("riboOpening");
+		addToTextList("vesicleOpening");
 		frame.add(jonathan);
 		frame.pack();
 		frame.setVisible(true);
