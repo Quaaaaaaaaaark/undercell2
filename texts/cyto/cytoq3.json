@@ -1,10 +1,15 @@
-CYTOPLASM: Question 3, select V
+CYBIL: Here's your next question, dearie.
+CYBIL: TRANSITION TO QUEST- hmm, really? Interesting!
+CYBIL: This reminds me of that time I got quizzed by those lysosome enzymes...
+CYBIL: They thought I... and that... and maybe... ah, who cares about that old story! Let's get on to the interesting bit, shall we?
+CYBIL: So this CYTOPLASM is split into two main subsections, the ectoplasm and the endoplasm. 
+CYBIL: Can you tell me the difference between the ECTOPLASM and the ENDOPLASM?
 STOP
 QUIZ
-S
-T
-U
-V
-4
+Ectoplasm is the clear outer bit, endoplasm is the dense inner bit
+Ectoplasm is pure water, endoplasm contains other molecules
+Cells start with ectoplasm, which becomes endoplasm when more molecules are added
+Endoplasm is cytoplasm from living cells, ectoplasm is cytoplasm from dead 'ghost' cells
+1
 cytoSuccessC
 cytoFail

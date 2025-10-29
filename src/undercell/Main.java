@@ -33,9 +33,9 @@ public class Main {
 		knowledge = 0;
 		prevKnowledge = 0;
 		health = 8;
-		Main.status = "intfilGame";
+		Main.status = "riboGame";
 		Main.substate = "textbox";
-		addToTextList("intfilOpening");
+		addToTextList("riboOpening");
 		frame.add(jonathan);
 		frame.pack();
 		frame.setVisible(true);
@@ -102,8 +102,13 @@ public class Main {
 				options.add(entry);
 			}
 		}
-		textList.add(options.get(random(0,options.size()-1)));
-		postText = scan.nextLine();
+		if (knowledge == 0) {
+			textList.add(options.get(0));	
+			textList.add(options.get(1));
+		} else {
+			textList.add(options.get(random(2,options.size()-1)));
+		}
+			postText = scan.nextLine();
 	}
 	
 	public void nextText() {

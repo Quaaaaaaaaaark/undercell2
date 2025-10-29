@@ -1,10 +1,13 @@
-Vesicle: Retrying question 2. Pick B
+VESICLINT: Better than CLIVE'S, huh CLEO?
+VESICLARA: Sure doesn't seem that way!
+VESICLEO: I'm sure if we give them a second chance they'll catch on!
+VESICLEO: Protein! What is the membrane of a VESICLE?
 STOP
 QUIZ
-A
-B
-C
-D
-2
+The membrane is a layer of carbohydrates
+The membrane is a single layer of lipids
+The membrane is a phospholipid bilayer
+Trick question! It has no membrane
+3
 vesicleSuccessB
 vesicleFail

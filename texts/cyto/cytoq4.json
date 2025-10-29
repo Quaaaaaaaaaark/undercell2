@@ -1,10 +1,13 @@
-CYTOPLASM: Final question. That's all you get, that's all you need.
+CYBIL: Whoo! I've been doing this longer than you've been alive, but that never gets old!
+CYBIL: You wanted one more question right? Well, here we go.
+CYBIL: A lot of CYTOPLASM contains structures within it. These are called CYTOPLASMIC INCLUSIONS.
+CYBIL: Can you tell which of these is NOT a CYTOPLASMIC INCLUSION?
 STOP
 QUIZ
-S
-M
-U
-V
-2
+Glycogen globules (glucose storage)
+Lipid droplets (fat and oil storage)
+Crystals (crystalline protein structures)
+Nucleosomes (nucleotide storage)
+3
 cytoSuccessD
 cytoFail

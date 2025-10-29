@@ -1,10 +1,12 @@
-CYTOPLASM: Retry question 2, select U
+CYBIL: Here we go, let's give you another shot at that one.
+CYBIL: Take it from me, giving up never helped anybody!
+CYBIL: TRANSITION TO QUESTION
 STOP
 QUIZ
-S
-T
-U
-V
+Completely pure water
+A specific protein called 'Cytosine'
+Mostly organic molecules, salts, and  water
+Waste products from various cellular reactions
 3
 cytoSuccessC
 cytoFail

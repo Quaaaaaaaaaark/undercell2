@@ -1,12 +1,17 @@
-The ENDOPLASMIC RETICULUM appears!
-Note for Ant: Everything here is probably the same size and sprite, just in different patterns
-Endoplasmic Reticulum: Select Z
+You see two proteins. One rushes back and forth, panicking. The other reclines in a chair and calmly sips its drink.
+ROUGH EDDY: Get out of there! The RNA is on its way! The proteins are coming!
+SMOOTH EDDY: Relaaaaaax, Ed! It'll be fiiiiiine.
+ROUGH EDDY: Hold on, who are you? You're here to learn about the ENDOPLASMIC RETICULUM?
+ROUGH EDDY: The proteins will be synthesized any minute! Do we have time?
+SMOOTH EDDY: There's always time to chill, Eddy.
+ROUGH EDDY: ...OKAY. Okay. We can handle this.
+ROUGH EDDY: Let's start with the basics. Can you tell me which of these statements are true for both the rough and the smooth ER?
 STOP
 QUIZ
-Z
-Y
-X
-W
-1
+Both contain ribosomes
+Both produce proteins
+Both produce lipids
+None of the above
+4
 erSuccessA
 erFail

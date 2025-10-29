@@ -1,10 +1,13 @@
-Vacuole: Retry question 3, select the letter containing the playtester's soul
+POLYCHEFTIDE: Hm, perhaps the sucrose was a bad idea.
+POLYCHEFTIDE: We'd hate to distract you from the matter at hand.
+POLYCHEFTIDE: ...
+POLYCHEFTIDE: ...here, let's try glucose instead.
 STOP
 QUIZ
-H
-I
-J
-K
-3
+Vacuoles are often larger, and vesicles bring materials to them
+Vesicles are often larger and, transport the vacuoles to where they are needed
+Vacuoles are often larger, and use their materials to create vesicles
+Vesicles are often larger, and become vacuoles after consuming materials
+1
 vacuoleSuccessC
 vacuoleFail

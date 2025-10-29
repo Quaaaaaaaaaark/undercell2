@@ -1,11 +1,13 @@
-ER: Retry question 1
-ER: Select Z
+ROUGH EDDY: Thank goodness we survived that. But what now? Which question do I ask? What do I do?!?
+SMOOTH EDDY: Just let them retry the first question, dude. 
+ROUGH EDDY: Ah. Yes. Of course. Um.
+ROUGH EDDY: So. Which of these statements is true about both the rough and smooth ENDOPLASMIC RETICULUM?
 STOP
 QUIZ
-Z
-Y
-X
-W
-1
+Both contain ribosomes
+Both produce proteins
+Both produce lipids
+None of the above
+4
 erSuccessA
 erFail

@@ -1,10 +1,14 @@
-Vesicle: Retrying final question. Pick M
+VESICLIVE: You're so close!
+VESICLEO: You just have to get this one question right!
+VESICLINT: We're all rooting for you!
+VESICLARA: All you need to do is tell me...
+VESICLARA: Which of these organelles isn't considered a VESICLE?
 STOP
 QUIZ
-A
-B
-C
-M
-4
+GOLGI APPARATUS
+LYSOSOME
+PEROXISOME
+VACUOLE
+1
 vesicleSuccessD
 vesicleFail

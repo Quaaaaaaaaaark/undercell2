@@ -1,10 +1,13 @@
-Ribosome: Retry question one, select T
+RIBOONE: Another chance? Apparently that's the policy.
+RIBOONE: Can't say I agree myself, but they don't pay us to ask questions.
+RIBOONE: Well, technically they do, but only to ask questions to you. Not to them.
+RIBOONE: In any case, I'm still waiting for you to tell me why RIBOSOMES are important to a cell.
 STOP
 QUIZ
-T
-U
-V
-W
-1
+They make carbohydrates, which are then used to make cellular energy
+They make lipids, which are used for many organelle membranes
+They make proteins, which are required for many cell activities
+They make nucleic acids, which are then used to make DNA and RNA
+3
 riboSuccessA
 riboFail

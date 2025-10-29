@@ -1,10 +1,17 @@
-CYTOPLASM: Question 2, select U
+CYBIL: Whoo! That's always such a blast!
+CYBIL: You know, one time I took my friend Murphy out here...
+CYBIL: He was sliding all over! He even crashed right into the nucleus!
+CYBIL: The NUCLEUS! Can you imagine?
+CYBIL: So anyway, I... and he... so she said... and then... and better yet... not to mention... just hysterical!
+CYBIL: Right, right, the questions!
+CYBIL: Now, I hear people tend to use 'CYTOPLASM' to refer to everything, including the organelles, so for consistencies sake, lets call this gooey stuff the CYTOSOL.
+CYBIL: What's this CYTOSOL made of?
 STOP
 QUIZ
-S
-T
-U
-V
+Completely pure water
+A specific protein called 'Cytosine'
+Mostly organic molecules, salts, and water
+Waste products from various cellular reactions
 3
 cytoSuccessC
 cytoFail

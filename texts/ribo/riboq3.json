@@ -1,10 +1,13 @@
-Ribosome: Question 3, choose V
+RIBOONE: Third question, then? Let's get on with it.
+RIBOONE: You've learned that ribosomes are made up of two subunits.
+RIBOONE: I'll tell you now that one subunit is roughly twice the size of the other.
+RIBOONE: What is the purpose of each subunit?
 STOP
 QUIZ
-T
-U
-V
-W
-3
+Small forms the peptide bonds, large matches up the correct codons
+Small matches up the correct codons, large forms the peptide bonds
+Small matches and forms bonds while large holds the mRNA in place
+Small holds the mRNA in place while large matches and forms bonds
+2
 riboSuccessC
 riboFail

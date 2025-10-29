@@ -1,10 +1,12 @@
-CELL MEMBRANE: Question 4, you know the drill
+MEMBRANDALF: I believe one more question should be sufficient.
+MEMBRANDALF: Protein, if you get this correct, there shall be nothing more I can teach you.
+MEMBRANDALF: Which of the following is active transport, which requires energy to transport molecules across the membrane?
 STOP
 QUIZ
-Q
-R
-S
-M
-4
+Moving substances against their concentration gradient by vesicle
+Moving substances with their concentration gradient by diffusion
+Moving substances through channel proteins by facilitated diffusion
+Moving water against a solute concentration gradient by osmosis
+1
 membraneSuccessD
 membraneFail

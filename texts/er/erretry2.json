@@ -1,10 +1,15 @@
-ER: Retry question 2, pick Y
+SMOOTH EDDY: We're chill around here. 
+SMOOTH EDDY: Second, third, fourth chances? Long as you can survive the protein showers, whatever you need.
+SMOOTH EDDY: 'course, the other Eddy over there might be a little... stressed about it.
+ROUGH EDDY: This is a PERFECTLY NORMAL REACTION TO HAVE when I'm STANDING in a FACTORY that MAKES MY OWN SPECIES!
+SMOOTH EDDY: Let's just retry the question.
+SMOOTH EDDY: What is the primary function of the rough and smooth ENDOPLASMIC RETICULUM?
 STOP
 QUIZ
-Z
-Y
-X
-W
+Smooth produces proteins, rough produces lipids
+Smooth produces lipids, rough produces proteins
+Smooth produces ribosomes, rough produces mitochondria
+Smooth produces mitochondria, rough produces ribosomes
 2
 erSuccessB
 erFail

@@ -1,12 +1,15 @@
-Narrator: The NUCLEUS appears!
-Note for Ant: Everything in this one can be seen in the first section; second and third section are wider with multiple of each nucleotide
-Nucleus: Select answer A
+BOB sighs and fills out a piece of paperwork.
+BOB: Right, company policy says if you're here to learn about the nucleus, we have to help you out.
+BOB sighs again.
+BOB: ...two more hours until break.
+BOB: Here, start by telling me this.
+BOB: What's the main purpose of the NUCLEUS?
 STOP
 QUIZ
-A
-B
-C
-D
+Synthesize all other cell organelles
+Housing DNA to direct cell activities
+Using enzymes to break down DNA into usable proteins
+Providing a stable center for the CYTOSKELETON to grow from
 1
 nucleusSuccessA
 nucleusFail

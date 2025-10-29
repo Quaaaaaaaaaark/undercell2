@@ -1,10 +1,14 @@
-Lysosome: Question 3, select F
+LYSONDER: Your skill at evading the LYSOSOMES is most... impressive. You're far harder to catch than most.
+LYSONDER: I wonder, can you see this through to the end?
+LYSONDER: We have an important role in a much more... concerning setting as well.
+LYSONDER: Apoptosis. Programmed cell death.
+LYSONDER: When it becomes time for this cell to wipe itself out, what will the lysosomes do?
 STOP
 QUIZ
-AB
-CD
-E
-F
+Search for larger lysosomes to be broken down inside until only one remains
+Release protease enzymes into the cytoplasm to break it down
+Begin tracking down and consuming smaller organelles such as ribosomes
+Consume the nucleus in one final act
 4
 lysoSuccessC
 lysoFail

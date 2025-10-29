@@ -1,10 +1,17 @@
-Vesicle: fourth question, pick M because that's my name and I'm bored
+VESICLARA: My turn? Finally! Get ready, protein, for a question far better than any of theirs!
+VESICLEO: Hey! Mine was a great question.
+VESICLIVE: You think we could get this far without understanding the VESICLE's purpose?
+VESICLINT: Not to mention the fact that mine combined both purpose AND structure?
+VESICLARA: All right, all right! Just let me ask the question already!
+VESICLARA: You know, we've been referring to them as 'VESICLES' up until now. But really, we should be saying 'TRANSPORT AND SECRETORY VESICLES.'
+VESICLARA: In reality, many different organelles are also considered VESICLES.
+VESICLARA: Could you tell me which of the following is NOT a VESICLE?
 STOP
 QUIZ
-A
-B
-C
-M
-4
+GOLGI APPARATUS
+LYSOSOME
+PEROXISOME
+VACUOLE
+1
 vesicleSuccessD
 vesicleFail
