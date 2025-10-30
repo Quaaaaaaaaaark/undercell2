@@ -51,52 +51,87 @@ public class KeyInput extends KeyAdapter{
 				jonathan.menu_selector_i = jonathan.menu_selector_i + 1;
 				return;
 			case 10:
-				if (jonathan.menu_selector_i == 13) {
+				if (jonathan.menu_selector_i == 15) {
 					Main.status = "credits";
 					return;
 				}
-				Main.status = "textbox";
+				Main.substate = "textbox";
 				switch(jonathan.menu_selector_i) {
 				case 0:
 					Main.status = "golgiGame";
+					main.addToTextList("golgiOpening");
+					Main.health = 3;
 					break;
 				case 1:
-					Main.status = "riboGame";
+					Main.status = "vesicleGame";
+					main.addToTextList("vesicleOpening");
+					Main.health = 3;
 					break;
 				case 2:
-					Main.status = "globuleGame";
+					Main.status = "riboGame";
+					main.addToTextList("riboOpening");
+					Main.health = 8;
 					break;
 				case 3:
-					Main.status = "mitoGame";
+					Main.status = "globuleGame";
+					main.addToTextList("globuleOpening");
+					Main.health = 3;
 					break;
 				case 4:
-					Main.status = "lysoGame";
+					Main.status = "mitoGame";
+					main.addToTextList("mitoOpening");
+					Main.health = 5;
 					break;
 				case 5:
-					Main.status = "erGame";
+					Main.status = "lysoGame";
+					main.addToTextList("lysoOpening");
+					Main.health = 5;
 					break;
 				case 6:
-					Main.status = "nucleusGame";
+					Main.status = "erGame";
+					main.addToTextList("erOpening");
+					Main.health = 8;
 					break;
 				case 7:
-					Main.status = "vacuoleGame";
+					Main.status = "nucleusGame";
+					main.addToTextList("nucleusOpening");
+					Main.health = 3;
 					break;
 				case 8:
-					Main.status = "membraneGame";
+					Main.status = "vacuoleGame";
+					main.addToTextList("vacuoleOpening");
+					Main.health = 8;
 					break;
 				case 9:
-					Main.status = "cytoGame";
+					Main.status = "membraneGame";
+					main.addToTextList("membraneOpening");
+					Main.health = 8;
 					break;
 				case 10:
-					Main.status = "peroxiGame";
+					Main.status = "cytoGame";
+					main.addToTextList("cytoOpening");
+					Main.health = 5;
 					break;
 				case 11:
-					Main.status = "microfilGame";
+					Main.status = "microtubuleGame";
+					main.addToTextList("microtubuleOpening");
+					Main.health = 8;
 					break;
 				case 12:
-					Main.status = "intfilGame";
+					Main.status = "peroxiGame";
+					main.addToTextList("peroxiOpening");
+					Main.health = 8;
 					break;
-				
+				case 13:
+					Main.status = "microfilGame";
+					main.addToTextList("microfilOpening");
+					Main.health = 3;
+					break;
+				case 14:
+					Main.status = "intfilGame";
+					main.addToTextList("intfilOpening");
+					Main.health = 8;
+					break;
 				}
 				
 				return;

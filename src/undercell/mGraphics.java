@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -143,7 +146,8 @@ public class mGraphics extends JPanel implements Runnable{
 	}
 	
 	public void draw_list_of_strings(String[] l, int x, int y) {
-		g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/100));
+		g.setColor(Color.red);
+		g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/40));
 		for (int i = 0; i < l.length; i++) {
 			g.drawString(l[i], x, y+(i*20));
 		}
@@ -153,18 +157,28 @@ public class mGraphics extends JPanel implements Runnable{
 		g.setColor(Color.black);
 		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
 		String[] credits = {"Minigames: M Lind", "Start Menus and Additional Programming: Halie Karre", "Textures: Antimony Compton", "Questions: David Griffith", "Music: Rupert Smith"};
-		draw_list_of_strings(credits, 100, 100);
+		draw_list_of_strings(credits, 200, 100);
 	}
 	
 	public void mapSelect() {
-		String[] organelle_labels = {"Golgi Apperatus [][]", "Vesicle (o)", "Ribosome @*", "Mitochondria <#>", "Lysosome (,)", "ER {=", "Nucleus ( * )", "Vacuole [=]", "Membrane :==:", "Cytoplasm", "Microtubule 0=0", "Peroxisome (p)", "Microfiaments =x=", "Intermediate Filaments |||", "Credits"};
+		if (walk_cycle < 1) {
+			try {
+				AudioInputStream ais = AudioSystem.getAudioInputStream(new File("assets/music/main_cell_game_theme.wav"));
+				Clip clip = AudioSystem.getClip();
+				clip.open(ais);
+				clip.start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		String[] organelle_labels = {"Golgi Apparatus [][]", "Vesicle (o)", "Ribosome @*", "Central Vacuole (==)", "Mitochondria <#>", "Lysosome (,)", "ER {=", "Nucleus ( * )", "Vacuole [=]", "Membrane :==:", "Cytoplasm", "Microtubule 0=0", "Peroxisome (p)", "Microfiaments =x=", "Intermediate Filaments |||", "Credits"};
 		g.setColor(Color.black);
 		g.fillRect(0, 0, frame.getWidth(), frame.getHeight());
 		g.setColor(Color.cyan);
 		Ellipse2D.Double ellipse = new Ellipse2D.Double(10, 10, frame.getWidth()-10, frame.getHeight()-10);
 		g.fill(ellipse);
 		g.setColor(Color.white);
-		draw_list_of_strings(organelle_labels, 100, 100);
+		draw_list_of_strings(organelle_labels, 200, 100);
 		
 		
 		
@@ -176,7 +190,7 @@ public class mGraphics extends JPanel implements Runnable{
 			e.printStackTrace();
 			return;
 		}
-		g.drawImage(player, 80, 100+(menu_selector_i-1)*20, 20, 20, null);
+		g.drawImage(player, 180, 100+(menu_selector_i-1)*20, 20, 20, null);
 		
 		walk_cycle++;
 		
@@ -253,19 +267,13 @@ public class mGraphics extends JPanel implements Runnable{
 				drawHealthBar();
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.black);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.red);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -907,19 +915,13 @@ public class mGraphics extends JPanel implements Runnable{
 			drawHealthBar();
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.black);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.red);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -1247,19 +1249,13 @@ public class mGraphics extends JPanel implements Runnable{
 			drawHealthBar(8);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -1544,19 +1540,13 @@ public class mGraphics extends JPanel implements Runnable{
 			drawHealthBar();
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -1776,10 +1766,10 @@ public class mGraphics extends JPanel implements Runnable{
 			} else {
 				textBox(textList.get(0));
 			}
-			drawHealthBar();
+			drawHealthBar(5);
 		} else if (Main.substate.equals("quiz")) {
 			drawQuiz();
-			drawHealthBar();
+			drawHealthBar(5);
 		} else if (Main.substate.equals("quizAnswers")) {
 			drawQuiz();
 			if (timer.get() >= 2) {
@@ -1793,11 +1783,11 @@ public class mGraphics extends JPanel implements Runnable{
 				}
 				Main.substate = "textbox";
 			}
-			drawHealthBar();
+			drawHealthBar(5);
 		} else if (Main.substate.equals("game")) {
 			updatePlatformer();
 			drawMitoGame();
-			drawHealthBar();
+			drawHealthBar(5);
 		} else if (Main.substate.equals("gameCount")) {
 			if (animCounter < 30) {
 				animCounter++;
@@ -1809,7 +1799,7 @@ public class mGraphics extends JPanel implements Runnable{
 				timer.start();
 			} 
 			drawShrinkingBox();
-			drawHealthBar();
+			drawHealthBar(5);
 		} else if (Main.substate.equals("postgame")) {
 			if (animCounter < 30) {
 				animCounter++;
@@ -1822,25 +1812,19 @@ public class mGraphics extends JPanel implements Runnable{
 				}
 				Main.substate = "textbox";
 				drawEmptyTextBox();
-				drawHealthBar();
+				drawHealthBar(5);
 			} else {
 			drawGrowingBox();
-			drawHealthBar();
+			drawHealthBar(5);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -2033,19 +2017,13 @@ public class mGraphics extends JPanel implements Runnable{
 			drawHealthBar(5);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -2510,19 +2488,13 @@ public class mGraphics extends JPanel implements Runnable{
 			drawHealthBar(8);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -2779,19 +2751,13 @@ public class mGraphics extends JPanel implements Runnable{
 			drawHealthBar();
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -3193,19 +3159,13 @@ public class mGraphics extends JPanel implements Runnable{
 			drawHealthBar(8);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -3305,7 +3265,7 @@ public class mGraphics extends JPanel implements Runnable{
 			break;
 		}
 		try {
-			Image image = ImageIO.read(new File("assets/blob.png"));
+			Image image = ImageIO.read(new File("assets/glob.png"));
 			g.drawImage(image, x, y, length, length, null);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -3593,19 +3553,13 @@ public class mGraphics extends JPanel implements Runnable{
 			drawHealthBar(8);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 		
@@ -3783,19 +3737,13 @@ public void setUpMembraneMolecules() {
 			drawHealthBar(5);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -4034,19 +3982,13 @@ public void setUpMembraneMolecules() {
 			drawHealthBar(8);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -4258,19 +4200,13 @@ public void setUpMembraneMolecules() {
 			drawHealthBar(8);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -4500,19 +4436,13 @@ public void setUpMembraneMolecules() {
 			drawHealthBar();
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
@@ -4525,14 +4455,14 @@ public void setUpMembraneMolecules() {
 			dist = 40;
 			break;
 		case 2:
-			dist = 30;
+			dist = 35;
 			break;
 		case 3:
-			dist = 25;
+			dist = 30;
 			break;
 		}
 		int gapStart;
-		for (int i = 0; i<8; i++) {
+		for (int i = 0; i<4; i++) {
 			gapStart = Main.random(5, 95 - dist);
 			System.out.println(gapStart);
 			notPipes.add(new NotPipe(gapStart, gapStart + dist, 1+i*2));
@@ -4790,19 +4720,13 @@ public void setUpMembraneMolecules() {
 			drawHealthBar(8);
 			}
 		} else if (Main.substate.equals("demoEnd")) {
-			g.setColor(Color.green);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.white);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("End of Demo", g.getFont(), g.getFontRenderContext());
-			g.drawString("End of Demo", frameWidth()/2 - (g.getFontMetrics().stringWidth("End of Demo")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		} else if (Main.substate.equals("dead")) {
-			g.setColor(Color.red);
-			g.fillRect(0,0,frame.getWidth(), frame.getHeight());
-			g.setColor(Color.black);
-			g.setFont(new Font("Consolas", Font.BOLD, frameHeight()/4));
-			TextLayout tl = new TextLayout("YOU HAVE DIED", g.getFont(), g.getFontRenderContext());
-			g.drawString("YOU HAVE DIED", frameWidth()/2 - (g.getFontMetrics().stringWidth("YOU HAVE DIED")/2), frame.getHeight()/2 - round(tl.getBounds().getHeight()/2));
+			Main.substate = "menu";
+			Main.status = "mapSelect";
+			Main.knowledge = 0;
 		}
 	}
 	
